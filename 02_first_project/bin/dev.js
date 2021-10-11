@@ -24,7 +24,7 @@ hmrServer.use(webpackHotMiddleWare(clientCompiler, {
   path: '/static/__webpack_hmr',
 }));
 
-hmrServer.listen(3000, () => {
+hmrServer.listen(3001, () => {
   console.log('HMR server successful started');
 })
 
