@@ -28,18 +28,19 @@ interface MyArray<T> {
   // }, [initial]);
   // map<U>(fn: (el: T, index: number, arr: MyArray<T>) => U): MyArray<U>
 
-  reduce<U>(fn: (accumulator: T, value: T, index: number, arr: MyArray<T>) => T): MyArray<U>
+  reduce<U>(fn: (accumulator: U, value: T, index: number, arr: MyArray<T>) => U, initialValue: U): MyArray<U>;
 }
 
 const initialValue: number = 0;
 const numbArray: MyArray<number> = [1, 2, 3];
 const strArray: MyArray<string> = ['a', 'b', 'c'];
 
-numbArray.reduce((accumulator, value) => accumulator + value);
-numbArray.reduce((accumulator, value) => accumulator + value);
+const numb1 = numbArray.reduce((accumulator, value) => accumulator + value, 0);
+console.log(numb1)
+numbArray.reduce((accumulator, value) => accumulator + value, 'a');
 
-strArray.reduce((accumulator, value) => accumulator + value);
-strArray.reduce((accumulator, value) => accumulator + value);
+strArray.reduce((accumulator, value) => accumulator + value, 0);
+strArray.reduce((accumulator, value) => accumulator + value, 'a');
 
 // task4
 interface IHomeTask<T> {
@@ -52,7 +53,7 @@ interface IHomeTask<T> {
   }
 }
 
-const homeTask: MyPartial<IHomeTask<object>> = {
+const homeTask: MyPartial<Partial<IHomeTask<T>>> = {
   externalData: {
     value: 'win',
   }
