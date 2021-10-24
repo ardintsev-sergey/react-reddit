@@ -53,12 +53,12 @@ interface IHomeTask<T> {
   }
 }
 
-const homeTask: MyPartial<Partial<IHomeTask<T>>> = {
+const homeTask: MyPartial<IHomeTask<object>> = {
   externalData: {
     value: 'win',
   }
 }
 
-type MyPartial<T> = {
+type MyPartial<T> = Partial<{
   [N in keyof T]: T[N] extends object ? MyPartial<T[N]> : T[N]
-}
+}>
