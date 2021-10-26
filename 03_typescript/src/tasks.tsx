@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 // task1
 let tsString1 = 'Hello ';
 let tsString2 = 'World';
@@ -28,12 +30,15 @@ interface MyArray<T> {
   // }, [initial]);
   // map<U>(fn: (el: T, index: number, arr: MyArray<T>) => U): MyArray<U>
 
-  reduce<U>(fn: (accumulator: U, value: T, index: number, arr: MyArray<T>) => U, initialValue: U): MyArray<U>;
+  reduce<U>(fn: (accumulator: U, value: T, index: number, arr: T[]) => U | T, initialValue: U): U;
 }
 
 const initialValue: number = 0;
 const numbArray: MyArray<number> = [1, 2, 3];
 const strArray: MyArray<string> = ['a', 'b', 'c'];
+
+const example = [1, 2, 3];
+example.reduce
 
 const numb1 = numbArray.reduce((accumulator, value) => accumulator + value, 0);
 console.log(numb1)
@@ -59,6 +64,24 @@ const homeTask: MyPartial<IHomeTask<object>> = {
   }
 }
 
-type MyPartial<T> = Partial<{
-  [N in keyof T]: T[N] extends object ? MyPartial<T[N]> : T[N]
-}>
+type MyPartial<T> = {
+  [N in keyof T]?: T[N] extends object ? MyPartial<T[N]> : T[N]
+}
+
+// task 5
+function HomeComponent(props: { firstProp: string }) {
+  return (
+    <div>
+    { props.firstProp }
+    </div>
+  )
+}
+
+props: IProps;
+interface IProps {
+  firstProp: string
+}
+
+const t = TMyType<typeof HomeComponent>;
+
+type TMyType 
