@@ -84,4 +84,15 @@ interface IProps {
 
 const t = TMyType<typeof HomeComponent>;
 
-type TMyType 
+type TMyType<T> = T extends React.ComponentType<infer P> ? P : never;
+
+// task6
+type TDivProps = TGetJSXPropsProp<'div'>
+
+const props: TDivProps = {
+    some: '1233' // throw error потому что не содержится в атрибутах div
+    className: 'handler' // не выкидывает ошибку так как валидно для div элемента
+}
+
+type TGetJSXPropsProp<T extends keyof JSX.IntrinsicElements> =
+            JSX.IntrinsicElements[T] extends React.DetailedHTMLProps<infer P, any> ? P : never
