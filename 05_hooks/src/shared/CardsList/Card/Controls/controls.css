@@ -1,0 +1,12 @@
+.controls {
+  padding: 10px 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+@media (min-width: 1540px) {
+  .controls {
+    position: relative;
+  }
+}
