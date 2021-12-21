@@ -25,3 +25,15 @@
     transform: none;
   }
 }
+
+/* .dropdown__list {
+  background-color: bisque;
+  right: 150px;
+} */
+
+.dropDownItem {
+  min-width: 150px;  
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 228, 196, 0.5);
+}
