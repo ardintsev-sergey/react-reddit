@@ -1,6 +1,6 @@
 import React from 'react';
 import { merge } from '../../../../utils/js/merge';
-import { GenericList } from '../../../../utils/react/GenericList';
+import { EAs, GenericList } from '../../../../utils/react/GenericList';
 import { Dropdown } from '../../../Dropdown/Dropdown';
 import styles from './menu.css';
 
@@ -20,33 +20,31 @@ let menuList = [
   { text: 'Комментарии',
     id: '1',
     className: styles.dropDownItem,   
-    // As: 'a',
+    As: EAs.li,
   },
 
   { text: 'Скрыть',
     id: '2',
     className: styles.dropDownItem,    
     // onClick: null,
-    // As: 'div'
+    As: EAs.div,
   },
   { text: 'Поделиться',
     id: '3', 
     className: styles.dropDownItem,   
-    // As: 'a',
+    As: EAs.a,
   },
   { text: 'Сохранить',
     id: '4',
     className: styles.dropDownItem,    
-    // As: 'a',
+    As: EAs.li,
   },
   { text: 'Пожаловаться',
     id: '5',
-    className: styles.dropDownItem    
-    // As: 'a',
+    className: styles.dropDownItem,   
+    As: EAs.button,
   },
 ]
-
-
 
 export function Menu() {
   const [list, setList] = React.useState(menuList)

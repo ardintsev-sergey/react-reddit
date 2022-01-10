@@ -46,10 +46,10 @@ function AppComponent() {
       <button onClick={handleAdd}>Добавить элемент</button>
       <GenericList list={LIST.map(merge({onClick: handleItemClick }))}  />
       <Dropdown onOpen={() => console.log('opened')} onClose={() => console.log('closed')} isOpen={false} button={<button>Test</button>}>
-      <ul>
-      <GenericList list={LIST.map(merge({onClick: handleItemClick }))}  />  
-      </ul>  
-    </Dropdown>
+        <ul>
+          <GenericList list={LIST.map(merge({onClick: handleItemClick }))}  />  
+        </ul>  
+      </Dropdown>
     </Content>    
     </Layout>
   );

@@ -5,6 +5,9 @@
 }
 
 .menuBtn {
+  position: absolute;
+  top: 17px;
+  right: 0;
   width: 31px;
   height: 31px;
   display: flex;
@@ -26,12 +29,13 @@
   }
 }
 
-/* .dropdown__list {
+.list {
   background-color: bisque;
   right: 150px;
-} */
+}
 
 .dropDownItem {
+  display: block;
   min-width: 150px;  
   padding: 10px;
   margin-bottom: 10px;

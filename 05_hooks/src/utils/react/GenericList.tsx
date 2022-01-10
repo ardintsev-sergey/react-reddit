@@ -1,11 +1,18 @@
 import React from 'react'
 
+
+export enum EAs {
+  a = 'a',
+  li = 'li',
+  button = 'button',
+  div = 'div',
+}
 interface IItem {
   text: string;
   id: string;
   onClick: (id: string) => void;
   className?: string;
-  As?: 'a' | 'li' | 'button' | 'div';
+  As?: EAs;
   href?: string;
 }
 
@@ -26,7 +33,7 @@ interface IGenericListProps {
 export function GenericList({ list }: IGenericListProps) {
   return (
     <>
-      {list.map(({ As = "li", text, onClick, className, id, href }) => (
+      {list.map(({ As = EAs.li, text, onClick, className, id, href }) => (
         <As
           className={className}
           onClick={() => onClick(id)}
