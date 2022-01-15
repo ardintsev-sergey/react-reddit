@@ -1,4 +1,5 @@
 import React from 'react'
+import Icon, { IconsName } from '../../shared/Dropdown/Icons/Icon';
 
 
 export enum EAs {
@@ -14,6 +15,7 @@ interface IItem {
   className?: string;
   As?: EAs;
   href?: string;
+  type: IconsName;
 }
 
 interface IGenericListProps {
@@ -33,7 +35,8 @@ interface IGenericListProps {
 export function GenericList({ list }: IGenericListProps) {
   return (
     <>
-      {list.map(({ As = EAs.li, text, onClick, className, id, href }) => (
+      {list.map(({ As = EAs.li, text, onClick, className, id, href, type }) => (
+        <Icon type={type} />
         <As
           className={className}
           onClick={() => onClick(id)}

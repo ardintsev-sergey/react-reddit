@@ -2,6 +2,7 @@ import React from 'react';
 import { merge } from '../../../../utils/js/merge';
 import { EAs, GenericList } from '../../../../utils/react/GenericList';
 import { Dropdown } from '../../../Dropdown/Dropdown';
+import {IconsName} from '../../../Dropdown/Icons/Icon';
 import styles from './menu.css';
 
 const MenuBtn = () => {
@@ -21,6 +22,7 @@ let menuList = [
     id: '1',
     className: styles.dropDownItem,   
     As: EAs.li,
+    type: IconsName.comment,
   },
 
   { text: 'Скрыть',
@@ -28,21 +30,25 @@ let menuList = [
     className: styles.dropDownItem,    
     // onClick: null,
     As: EAs.div,
+    type: IconsName.block,
   },
   { text: 'Поделиться',
     id: '3', 
     className: styles.dropDownItem,   
     As: EAs.a,
+    type: IconsName.share,
   },
   { text: 'Сохранить',
     id: '4',
     className: styles.dropDownItem,    
     As: EAs.li,
+    type: IconsName.save,
   },
   { text: 'Пожаловаться',
     id: '5',
     className: styles.dropDownItem,   
     As: EAs.button,
+    type: IconsName.report,
   },
 ]
 
