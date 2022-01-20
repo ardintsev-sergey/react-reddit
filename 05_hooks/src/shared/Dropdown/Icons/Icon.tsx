@@ -16,9 +16,9 @@ export enum IconsName {
     save = 'save',
 }
 
-interface IIConsDefault {
+export interface IIConsDefault {
     className?: string,
-    type: IconsName,
+    type?: IconsName,
     size?: any,
     animated?: string,
 }
@@ -33,7 +33,7 @@ const Icon = (props: IIConsDefault) => {
 
     const PossibleIcons = () => {
         switch (props.type) {
-            case (IconsName.block) : return <BlockIcon size={defSize} />
+            case (IconsName.block className="icon") : return <BlockIcon className="icon" size={defSize} />
             case (IconsName.comment) : return <CommentIcon size={defSize} />
             case (IconsName.report) : return <ReportIcon size={defSize} />
             case (IconsName.share) : return <ShareIcon size={defSize} />

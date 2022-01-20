@@ -15,7 +15,7 @@ interface IItem {
   className?: string;
   As?: EAs;
   href?: string;
-  type: IconsName;
+  type?: IconsName;
 }
 
 interface IGenericListProps {
@@ -35,14 +35,14 @@ interface IGenericListProps {
 export function GenericList({ list }: IGenericListProps) {
   return (
     <>
-      {list.map(({ As = EAs.li, text, onClick, className, id, href, type }) => (
-        <Icon type={type} />
+      {list.map(({ As = EAs.li, text, onClick, className, id, href, type }) => (        
         <As
           className={className}
           onClick={() => onClick(id)}
           key={id}
           href={href}
         >
+          <Icon type={type} />
           {text}
         </As>
       ))}
