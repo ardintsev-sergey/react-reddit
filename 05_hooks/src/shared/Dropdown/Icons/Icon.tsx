@@ -5,8 +5,7 @@ import CommentIcon from "./CommentIcon";
 import ReportIcon from "./ReportIcon";
 import ShareIcon from "./ShareIcon";
 import SaveIcon from "./SaveIcon";
-
-
+import styles from './icon.css';
 
 export enum IconsName {
     block = 'block',
@@ -33,7 +32,7 @@ const Icon = (props: IIConsDefault) => {
 
     const PossibleIcons = () => {
         switch (props.type) {
-            case (IconsName.block className="icon") : return <BlockIcon className="icon" size={defSize} />
+            case (IconsName.block ) : return <BlockIcon size={defSize} />
             case (IconsName.comment) : return <CommentIcon size={defSize} />
             case (IconsName.report) : return <ReportIcon size={defSize} />
             case (IconsName.share) : return <ShareIcon size={defSize} />
@@ -44,7 +43,7 @@ const Icon = (props: IIConsDefault) => {
 
     return (
         <div style={{marginRight: '5px'}}
-            className={props.className ? props.className : 'default_icon'}>
+            className={props.className ? props.className : styles.default_icon}>
             <PossibleIcons />
         </div>
     )
