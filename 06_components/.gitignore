@@ -1,0 +1,6 @@
+.idea
+node_modules
+example.ts
+generics.tsx
+mapped.ts
+dist/
