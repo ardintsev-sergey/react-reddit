@@ -1,6 +1,7 @@
 import React from 'react'
 import Icon, { IconsName } from '../../shared/Icons/Icon';
 import { EColor, Text } from '../../shared/Text/Text';
+import styles from './../../shared/CardsList/Card/Menu/MenuItemsList/menuItemsList.css'
 
 
 export enum EAs {
@@ -44,7 +45,8 @@ export function GenericList({ list }: IGenericListProps) {
           href={href}
         >
           <Icon type={type} />
-          <Text mobileSize={12} size={14} color={EColor.grey66}>{text}</Text> 
+          <Text mobileSize={12} size={14} color={EColor.grey66}>{text}</Text>
+          <div className={styles.divider}/> 
         </As>
       ))}
     </>

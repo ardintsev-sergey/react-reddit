@@ -55,7 +55,7 @@ export function Menu() {
         <button className={styles.menuBtn}>
           <MenuIcon />
         </button> }
-        children = {<div className={styles.list}>
+        children = {<div className={styles.dropdown}>
           <GenericList list={menuList.map(merge({onClick: handleItemClick }))}/>
           <button className={styles.closeBtn}>
           <Text mobileSize={12} size={14} color={EColor.grey66}>
