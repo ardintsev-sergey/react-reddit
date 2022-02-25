@@ -1,0 +1,9 @@
+.preview {
+  max-height: 178px;
+}
+
+.prevImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
