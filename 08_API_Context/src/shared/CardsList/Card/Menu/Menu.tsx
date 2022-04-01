@@ -43,7 +43,11 @@ let menuList = [
   },
 ]
 
-export function Menu() {
+interface IMenuProps {
+  postId: string;
+}
+
+export function Menu({ postId }: IMenuProps) {
   const [list, setList] = React.useState(menuList)
   const handleItemClick = (id: string) => {
   setList(list.filter((item) => item.id != id))

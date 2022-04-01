@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePostsData } from '../../hooks/usePostsData';
+import { usePostsData } from './../hooks/usePostsData';
 
 
 export interface IPostContextData {

@@ -5,3 +5,7 @@
 .likesValue {
   color: var(--greyC4);
 }
+
+.down {
+  transform: rotate(180deg);
+}

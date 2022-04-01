@@ -4,12 +4,19 @@ import { Comments } from './Comments.tsx/Comments';
 import styles from './controls.css';
 import { LikesCounter } from './LikesCounter/LikesCounter';
 
-export function Controls() {
+interface IControlsProps {
+  score: number,
+  count: number
+}
+
+export function Controls({score, count}: IControlsProps) {
   return (
     <div className={styles.controls}>
-      <LikesCounter />
-      <Comments />
+      <LikesCounter score={score}/>
+      <Comments count={count}/>
       <Actions />
     </div>
   )
 }
+
+//         <Actions />

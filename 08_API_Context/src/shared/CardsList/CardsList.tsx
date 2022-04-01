@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { postsContext } from '../context/postsContext';
+import { postsContext } from './../../context/postsContext';
 import { Card } from './Card/Card';
 import styles from './cardsList.css';
 
@@ -16,7 +16,7 @@ export function CardsList() {
 
   return (
     <ul className={styles.cardsList}>
-      {children && children.map((child) => <Card key={child.id} />)}
+      {children && children.map((child) => <Card key={child.id} postData={child}/>)}
     </ul>
   );
 }
