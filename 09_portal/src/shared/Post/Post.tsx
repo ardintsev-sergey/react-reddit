@@ -20,7 +20,7 @@ export function Post(props: IPost) {
     document.addEventListener('click', handleClick);
 
     return () => {
-      document.addEventListener('click', handleClick)
+      document.removeEventListener('click', handleClick)
     }
   }, [])
 
