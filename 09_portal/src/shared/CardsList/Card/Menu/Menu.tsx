@@ -55,6 +55,17 @@ export function Menu({ postId }: IMenuProps) {
 
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
 
+  const menuBtn = document.querySelector('.menuBtn');
+  const dropdown = document.querySelector('dropdown')
+
+  function positionAt(menuBtn: any, dropdown: any) {
+    let menuBtnCoords = menuBtn.getBoundingClientRect();
+    dropdown.style.left = menuBtnCoords.left + "px";
+    dropdown.style.top = menuBtnCoords.top - dropdown.offsetY + "px";
+  }
+
+  positionAt(menuBtn, dropdown);
+
   return (
     <div className={styles.menu}>
       <button className={styles.menuBtn} onClick={() => { setIsDropdownOpened(true); }}>
@@ -63,7 +74,8 @@ export function Menu({ postId }: IMenuProps) {
 
       {isDropdownOpened && (
         <Dropdown
-        onClose={() => {setIsDropdownOpened(false)}} />
+        onClose={() => {setIsDropdownOpened(false)}}
+        className={styles.dropdown} />
       )}
 
     </div>
