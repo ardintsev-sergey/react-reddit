@@ -1,14 +1,17 @@
 .container {
-  width: 100%;
+  position: absolute;
+  width: max-content;
+  /* top: 60px;
+  right: 150px; */
   flex: 1 1 0%;
   background: #FFFFFF;
   z-index: 20;
 }
 
 .listContainer {
-  position: absolute;
+  /* position: absolute;
   top: 60px;
-  right: 150px;
+  right: 150px; */
   padding: 20px;
   background-color: var(--white);
   z-index: 20;

@@ -14,6 +14,10 @@ interface IDropdownProps {
   id?: string,
   onOpen?: () => void;
   onClose?: () => void;
+  style?: {
+    top: number,
+    left: number,
+  }
 }
 
 const NOOP = () => {};
@@ -53,7 +57,7 @@ let menuList = [
   },
 ]
 
-export function Dropdown({ isOpen, onOpen = NOOP, onClose = NOOP }: IDropdownProps) {
+export function Dropdown({ isOpen, onOpen = NOOP, onClose = NOOP, style }: IDropdownProps) {
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -82,7 +86,10 @@ export function Dropdown({ isOpen, onOpen = NOOP, onClose = NOOP }: IDropdownPro
 
 
   return ReactDOM.createPortal((
-    <div className={styles.container} ref={ref}>
+    <div className={styles.container} ref={ref} style={{
+      top: style?.top,
+      left: style?.left,
+    }}>
       <div className={styles.listContainer}>
         <ul className={styles.list}>
           <div className={styles.dropdown}>

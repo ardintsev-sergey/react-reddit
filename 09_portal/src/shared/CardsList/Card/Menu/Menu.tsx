@@ -1,5 +1,4 @@
-import React, { Children, useState } from 'react';
-import { merge } from '../../../../utils/js/merge';
+import React, { Children, useEffect, useRef, useState } from 'react';
 import { EAs, GenericList } from '../../../../utils/react/GenericList';
 import { Dropdown } from '../../../Dropdown/Dropdown';
 import { IconsName } from '../../../Icons/Icon';
@@ -47,35 +46,38 @@ interface IMenuProps {
   postId: string;
 }
 
+
 export function Menu({ postId }: IMenuProps) {
-  const [list, setList] = React.useState(menuList)
-  const handleItemClick = (id: string) => {
-    setList(list.filter((item) => item.id != id))
-  }
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  // const rect = ref.current?.getBoundingClientRect();
+  const rect = document.body.getBoundingClientRect();
+  // function btnCoord = (e: MouseEvent) => {
+  //   const btn = e.target.getBoundingClientRect();
+  // }
+
+  console.log(rect)
+  console.log(rect.top, rect.left)
 
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
 
-  const menuBtn = document.querySelector('.menuBtn');
-  const dropdown = document.querySelector('dropdown')
-
-  function positionAt(menuBtn: any, dropdown: any) {
-    let menuBtnCoords = menuBtn.getBoundingClientRect();
-    dropdown.style.left = menuBtnCoords.left + "px";
-    dropdown.style.top = menuBtnCoords.top - dropdown.offsetY + "px";
-  }
-
-  positionAt(menuBtn, dropdown);
-
   return (
     <div className={styles.menu}>
-      <button className={styles.menuBtn} onClick={() => { setIsDropdownOpened(true); }}>
+      <button className={styles.menuBtn} onClick={() => { setIsDropdownOpened(true); } }>
           <MenuIcon />
       </button>
 
       {isDropdownOpened && (
         <Dropdown
         onClose={() => {setIsDropdownOpened(false)}}
-        className={styles.dropdown} />
+        className={styles.dropdown}
+        style={{
+          top: Math.round(rect ? rect.top + rect?.height : 0),
+          // top: Math.round(rect ? rect.top : 0),
+          left: Math.round(rect ? rect.left + rect?.width/2 : 0),
+          // left: Math.round(rect ? rect.left  : 0),
+        }}/>
       )}
 
     </div>
