@@ -10,12 +10,17 @@
   flex: 1 1 100%;
 }
 
+.cardTop {
+  display: flex;
+  align-items: center;
+}
+
 @media (min-width: 1024px) {
   .card {
     padding: 0 60px;
-  }  
-  
-  .card:hover h2 a, .card:focus-within h2 a {    
+  }
+
+  .card:hover h2 a, .card:focus-within h2 a {
     color: var(--orange);
   }
 }

@@ -16,6 +16,7 @@ interface IDropdownProps {
   onClose?: () => void;
   style?: {
     top: number,
+    // right: number
     left: number,
   }
 }
@@ -88,6 +89,7 @@ export function Dropdown({ isOpen, onOpen = NOOP, onClose = NOOP, style }: IDrop
   return ReactDOM.createPortal((
     <div className={styles.container} ref={ref} style={{
       top: style?.top,
+      // right: style?.right,
       left: style?.left,
     }}>
       <div className={styles.listContainer}>

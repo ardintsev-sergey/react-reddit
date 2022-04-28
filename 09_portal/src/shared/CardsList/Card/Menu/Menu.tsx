@@ -61,10 +61,17 @@ export function Menu({ postId }: IMenuProps) {
   console.log(rect.top, rect.left)
 
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
+  const [varY, setVarY] = useState(0);
+  const [varX, setVarX] = useState(0);
 
   return (
     <div className={styles.menu}>
-      <button className={styles.menuBtn} onClick={() => { setIsDropdownOpened(true); } }>
+      <button className={styles.menuBtn}
+        onClick={(event) =>
+          { setIsDropdownOpened(true);
+            setVarY(event.pageY);
+            setVarX(event.pageX);
+            } }>
           <MenuIcon />
       </button>
 
@@ -73,10 +80,8 @@ export function Menu({ postId }: IMenuProps) {
         onClose={() => {setIsDropdownOpened(false)}}
         className={styles.dropdown}
         style={{
-          top: Math.round(rect ? rect.top + rect?.height : 0),
-          // top: Math.round(rect ? rect.top : 0),
-          left: Math.round(rect ? rect.left + rect?.width/2 : 0),
-          // left: Math.round(rect ? rect.left  : 0),
+          top: Math.round(varY + 50),
+          left: Math.round(varX - 100)
         }}/>
       )}
 

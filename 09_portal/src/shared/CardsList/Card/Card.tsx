@@ -10,20 +10,22 @@ interface ICardProps {
   postData: IPostContextData;
 }
 
-export function Card({ postData }: ICardProps) {  
+export function Card({ postData }: ICardProps) {
   const { author, authorIcon, authorId, created, id, preview, score, title, commentsCount } = postData;
   return (
-    <li className={styles.card}>      
-      <TextContent
-        postId={id}
-        text={title}
-        date={created}
-        authorId={authorId}
-        author={author}
-        authorIcon={authorIcon}
-      />
-      <Preview image={preview} />
-      <Menu postId={id} />      
+    <li className={styles.card}>
+      <div className={styles.cardTop}>
+        <Preview image={preview} />
+        <TextContent
+          postId={id}
+          text={title}
+          date={created}
+          authorId={authorId}
+          author={author}
+          authorIcon={authorIcon}
+        />
+      </div>
+      <Menu postId={id} />
       <Controls score={score} count={commentsCount}/>
     </li>
   )
