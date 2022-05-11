@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { CommentForm } from '../CommentForm';
+import { CommentFormContainer } from '../CommentFormContainer';
 import styles from './post.css';
 import { PostComments } from './PostComments/PostComments';
 import { PostHeader } from './PostHeader/PostHeader';
@@ -40,7 +40,7 @@ export function Post(props: IPost) {
         <p>Есть над чем задуматься: тщательное исследовани...</p>
       </div>
 
-      <CommentForm />
+      <CommentFormContainer />
       <PostComments />
     </div>
   ), node);
