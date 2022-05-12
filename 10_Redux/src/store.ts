@@ -25,7 +25,7 @@ export const rootReducer: Reducer = (state = initialState, action) => {
     case SET_TOKEN:
       return {
         ...state,
-        token: action.__token__,
+        token: action.token,
       }
       default:
         return state;
@@ -33,11 +33,7 @@ export const rootReducer: Reducer = (state = initialState, action) => {
 }
 
 const SET_TOKEN = 'SET_TOKEN';
-export const setToken: ActionCreator<AnyAction> = (__token__) => ({
+export const setToken: ActionCreator<AnyAction> = (token) => ({
   type: SET_TOKEN,
-  __token__,
+  token,
 })
-
-  const value = useSelector<RootState, string>(state => state.token);
-  const dispatch = useDispatch();
-    dispatch(setToken(window.__token__));

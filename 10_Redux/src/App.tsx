@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './main.global.css';
 import { hot } from "react-hot-loader/root";
 import { Layout } from "./shared/Layout/Layout";
@@ -12,19 +12,28 @@ import { PostsContextProvider } from "./context/postsContext";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { rootReducer } from "./store";
+import { rootReducer, setToken } from "./store";
+import { useDispatch } from "react-redux";
 
 
 const store = createStore(rootReducer, composeWithDevTools());
 
 function AppComponent() {
-  const [token] = useToken();
+  // const [token] = useToken();
+
+  // const value = useSelector<RootState, string>(state => state.token);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (window.__token__) {
+      dispatch(setToken(window.__token__));
+    }
+    }, []);
 
   // const { Provider } = tokenContext;
   // const CommentProvider = commentContext.Provider;
-  return(
-    <Provider store={store}>
-        <tokenContext.Provider value={token}>
+  return (
+    // <Provider store={store}>
+    //  <tokenContext.Provider value={token}>
           <UserContextProvider>
             <PostsContextProvider>
             <Layout>
@@ -35,10 +44,13 @@ function AppComponent() {
             </Layout>
             </PostsContextProvider>
           </UserContextProvider>
-        </tokenContext.Provider>
-    </Provider>
-
+    //      </tokenContext.Provider>
+    //  </Provider>
   );
 }
 
-export const App = hot(() => <AppComponent />);
+// export const App = hot(() => <AppComponent />);
+export const App = hot(() =>
+  <Provider store={store}>
+    <AppComponent />
+  </Provider>);
