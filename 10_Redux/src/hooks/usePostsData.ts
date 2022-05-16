@@ -1,6 +1,7 @@
 import { tokenContext } from "./../context/tokenContext";
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { store } from "../App";
 
 interface IPostData {
   id: string;
@@ -23,7 +24,8 @@ interface IPostsData {
 
 export function usePostsData() {
   const [data, setData] = useState<IPostsData>({});
-  const token = useContext(tokenContext);
+  // const token = useContext(tokenContext);
+  const token = store.getState().token;
 
   useEffect(() => {
     if (token) {
