@@ -57,8 +57,8 @@ export function Menu({ postId }: IMenuProps) {
   //   const btn = e.target.getBoundingClientRect();
   // }
 
-  console.log(rect)
-  console.log(rect.top, rect.left)
+  // console.log(rect)
+  // console.log(rect.top, rect.left)
 
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
   const [varY, setVarY] = useState(0);

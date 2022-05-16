@@ -1,7 +1,7 @@
-import { tokenContext } from "./../context/tokenContext";
-import React, { useContext, useEffect, useState } from "react";
+import { RootState } from './../store';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { store } from "../App";
 
 interface IPostData {
   id: string;
@@ -24,8 +24,8 @@ interface IPostsData {
 
 export function usePostsData() {
   const [data, setData] = useState<IPostsData>({});
-  // const token = useContext(tokenContext);
-  const token = store.getState().token;
+  const token = useSelector((x: RootState) => x.token);
+  console.log(token);
 
   useEffect(() => {
     if (token) {
