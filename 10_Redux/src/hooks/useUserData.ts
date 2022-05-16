@@ -5,6 +5,7 @@ import { useStore } from 'react-redux';
 import { createStore } from 'redux';
 import { rootReducer } from '../store';
 import { composeWithDevTools } from '@redux-devtools/extension';
+import { store } from '../App';
 
 interface IUserData {
   name?: string;
@@ -13,9 +14,8 @@ interface IUserData {
 
 export function useUserData() {
     const [data, setData] = useState<IUserData>({});
-    const token = useContext(tokenContext);
-    // const store = createStore(rootReducer, composeWithDevTools());
-    // const token = store.getState().token;
+    // const token = useContext(tokenContext);
+    const token = store.getState().token;
 
     useEffect(() => {
       axios.get('https://oauth.reddit.com/api/v1/me', {
