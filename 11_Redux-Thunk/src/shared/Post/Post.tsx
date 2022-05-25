@@ -1,0 +1,47 @@
+import React, { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import { CommentFormContainer } from '../CommentFormContainer';
+import styles from './post.css';
+import { PostComments } from './PostComments/PostComments';
+import { PostHeader } from './PostHeader/PostHeader';
+
+interface IPost{
+  onClose?: () => void;
+}
+
+export function Post(props: IPost) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(event: MouseEvent) {
+      if (event.target instanceof Node && !ref.current?.contains(event.target)) {
+        console.log('clicked out')
+        props.onClose?.();
+      }
+    }
+
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick)
+    }
+  }, [])
+
+
+  const node = document.querySelector('#modal_root');
+  if (!node) return null;
+  return ReactDOM.createPortal((
+    <div className={styles.modal} ref={ref} >
+      <PostHeader />
+
+      <div className={styles.content}>
+        <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>
+        <p>Есть над чем задуматься: тщательное исследовани...</p>
+        <p>Есть над чем задуматься: тщательное исследовани...</p>
+      </div>
+
+      <CommentFormContainer />
+      <PostComments />
+    </div>
+  ), node);
+}
