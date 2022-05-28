@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useContext, useRef, useState } from 'rea
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useStore } from 'react-redux';
-import { RootState, updateComment } from '../../store/store';
+import { RootState, updateComment } from '../../store/reducer';
 import { CommentForm } from '../CommentForm/CommentForm';
 
 export function CommentFormContainer() {

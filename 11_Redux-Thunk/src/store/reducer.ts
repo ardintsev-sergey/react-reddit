@@ -61,7 +61,7 @@ type setTokenAction = {
   type: typeof SET_TOKEN;
   token: string;
 }
-export const setToken: ActionCreator<AnyAction> = (token) => ({
+export const setToken: ActionCreator<setTokenAction> = (token) => ({
   type: SET_TOKEN,
   token,
 })

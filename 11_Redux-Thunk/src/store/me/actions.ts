@@ -28,24 +28,24 @@ export const meRequestSuccess: ActionCreator<MeRequestSuccessAction> = (data: IU
 export const ME_REQUEST_ERROR = 'ME_REQUEST_ERROR';
 export type MeRequestErrorAction = {
   type: typeof ME_REQUEST_ERROR;
-  error: Error;
+  error: string;
 };
-export const meRequestError: ActionCreator<MeRequestErrorAction> = (error: Error) => ({
+export const meRequestError: ActionCreator<MeRequestErrorAction> = (error: string) => ({
   type: ME_REQUEST_ERROR,
   error,
 });
 
 export const meRequestAsync = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
   dispatch(meRequest());
-      axios.get('https://oauth.reddit.com/api/v1/me', {
-        headers: {Authorization: `bearer ${getState().token}`}
-      })
-        .then((resp ) => {
-          const userData = resp.data;
-          dispatch(meRequestSuccess({ name: userData.name, iconImg: userData.icon_img }));
-        })
-        .catch((error) => {
-          console.log(error)
-          dispatch(meRequestError(String(error)));
-        });
+  axios.get('https://oauth.reddit.com/api/v1/me', {
+    headers: {Authorization: `bearer ${getState().token}`}
+  })
+    .then((resp ) => {
+      const userData = resp.data;
+      dispatch(meRequestSuccess({ name: userData.name, iconImg: userData.icon_img }));
+    })
+    .catch((error) => {
+      console.log(error)
+      dispatch(meRequestError(String(error)));
+    });
 }

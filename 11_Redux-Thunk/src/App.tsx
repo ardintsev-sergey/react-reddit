@@ -10,7 +10,7 @@ import { PostsContextProvider } from "./context/postsContext";
 import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { rootReducer, RootState, setToken } from "./store/reducer";
+import { rootReducer, setToken } from "./store/reducer";
 import { useDispatch } from "react-redux";
 import thunk from "redux-thunk";
 
