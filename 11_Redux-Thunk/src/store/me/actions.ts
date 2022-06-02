@@ -1,9 +1,9 @@
-import { Action } from 'redux';
 import { RootState } from './../reducer';
 import { ThunkAction } from 'redux-thunk';
 import { IUserData } from './../../hooks/useUserData';
 import { ActionCreator } from 'redux';
 import axios from 'axios';
+import { MeActions } from './reducer';
 
 export const ME_REQUEST = 'ME_REQUEST';
 export type MeRequestAction = {
@@ -35,7 +35,7 @@ export const meRequestError: ActionCreator<MeRequestErrorAction> = (error: strin
   error,
 });
 
-export const meRequestAsync = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
+export const meRequestAsync = (): ThunkAction<void, RootState, unknown, MeActions> => (dispatch, getState) => {
   dispatch(meRequest());
   axios.get('https://oauth.reddit.com/api/v1/me', {
     headers: {Authorization: `bearer ${getState().token}`}

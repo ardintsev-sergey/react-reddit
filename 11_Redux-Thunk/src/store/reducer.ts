@@ -1,14 +1,19 @@
-import { meReducer, MeState } from './me/reducer';
+import { setTokenAction, SET_TOKEN } from './token/action';
+import { MeActions, meReducer, MeState } from './me/reducer';
 import { ME_REQUEST, ME_REQUEST_SUCCESS, ME_REQUEST_ERROR, MeRequestErrorAction, MeRequestSuccessAction, MeRequestAction } from './me/actions';
 import { ActionCreator, AnyAction, Reducer } from "redux";
+import { store } from '../App';
+import { initialTokenState, tokenReducer, tokenState } from './token/reducer';
 
 export type RootState = {
   commentText: string;
+  // token: tokenState;
   token: string;
   me: MeState;
 }
 export const initialState: RootState = {
   commentText: 'Привет, Мир!',
+  // token: initialTokenState,
   token: '',
   me: {
     loading: false,
@@ -27,11 +32,9 @@ export const updateComment: ActionCreator<updateCommentAction> = (text) => ({
   text,
 });
 
-type MyAction = updateCommentAction
+export type MyAction = updateCommentAction
   | setTokenAction
-  | MeRequestAction
-  | MeRequestErrorAction
-  | MeRequestSuccessAction;
+  | MeActions;
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_COMMENT:
@@ -39,10 +42,10 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
         ...state,
         commentText: action.text,
       };
-    case SET_TOKEN:
+      case SET_TOKEN:
       return {
         ...state,
-        token: action.token,
+        token: tokenReducer(state.token, action)
       }
     case ME_REQUEST:
     case ME_REQUEST_SUCCESS:
@@ -56,12 +59,4 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
   }
 }
 
-const SET_TOKEN = 'SET_TOKEN';
-type setTokenAction = {
-  type: typeof SET_TOKEN;
-  token: string;
-}
-export const setToken: ActionCreator<setTokenAction> = (token) => ({
-  type: SET_TOKEN,
-  token,
-})
+export type AppDispatch = typeof store.dispatch

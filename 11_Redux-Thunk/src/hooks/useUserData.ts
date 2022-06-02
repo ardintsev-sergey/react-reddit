@@ -1,3 +1,4 @@
+import { AppDispatch } from './../store/reducer';
 import { meRequestAsync } from './../store/me/actions';
 import { useEffect } from 'react';
 import { RootState } from '../store/reducer';
@@ -12,12 +13,14 @@ export function useUserData() {
     const data = useSelector<RootState, IUserData>(state => state.me.data);
     const loading = useSelector<RootState, boolean>(state => state.me.loading);
     const token = useSelector((state: RootState) => state.token);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch<any>();
     console.log(token);
 
     useEffect(() => {
       if (!token) return;
-      dispatch(meRequestAsync())
+      dispatch(meRequestAsync());
+
     }, [token])
 
     return {

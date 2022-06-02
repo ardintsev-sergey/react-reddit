@@ -10,9 +10,10 @@ import { PostsContextProvider } from "./context/postsContext";
 import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { rootReducer, setToken } from "./store/reducer";
+import { rootReducer} from "./store/reducer";
 import { useDispatch } from "react-redux";
 import thunk from "redux-thunk";
+import { saveToken } from "./store/token/action";
 
 // const logger: Middleware = (store) => (next) => (action) => {
 //   console.log('dispatching:', action);
@@ -32,18 +33,17 @@ export const store = createStore(rootReducer, composeWithDevTools(
 // }
 
 function AppComponent() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (window.__token__) {
-      dispatch(setToken(window.__token__));
-    };
-    // @ts-ignore
-    // store.dispatch(timeout(5000));
-    }, []);
+  const dispatch = useDispatch<any>();
+  // useEffect(() => {
+  //   if (window.__token__) {
+  //     dispatch(setToken(window.__token__));
+  //   };
+  //   // @ts-ignore
+  //   // store.dispatch(timeout(5000));
+  //   }, []);
 
+  dispatch(saveToken());
   return (
-    // <Provider store={store}>
-    //  <tokenContext.Provider value={token}>
           <UserContextProvider>
             <PostsContextProvider>
             <Layout>
@@ -54,12 +54,9 @@ function AppComponent() {
             </Layout>
             </PostsContextProvider>
           </UserContextProvider>
-    //      </tokenContext.Provider>
-    //  </Provider>
   );
 }
 
-// export const App = hot(() => <AppComponent />);
 export const App = hot(() =>
   <Provider store={store}>
     <AppComponent />
