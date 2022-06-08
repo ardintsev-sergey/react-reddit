@@ -3,7 +3,7 @@ import { MeActions, meReducer, MeState } from './me/reducer';
 import { ME_REQUEST, ME_REQUEST_SUCCESS, ME_REQUEST_ERROR, MeRequestErrorAction, MeRequestSuccessAction, MeRequestAction } from './me/actions';
 import { ActionCreator, AnyAction, Reducer } from "redux";
 import { store } from '../App';
-import { initialTokenState, tokenReducer, tokenState } from './token/reducer';
+import { tokenReducer } from './token/reducer';
 
 export type RootState = {
   commentText: string;
