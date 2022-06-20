@@ -1,0 +1,32 @@
+.postMeta {
+  display: flex;
+  align-items: center;
+}
+
+.userLink {
+  margin-right: 25px;
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  margin: 0 7px 0 0;
+}
+
+.createdAt {
+  margin-right: 25px;
+}
+
+.league {
+  padding: 5px 10px;
+  background-color: var(--greyD9);
+}
+
+.commentBtn {
+  margin-right: 50px;
+}
+
+.username {
+  color: var(--orange);
+}
