@@ -15,38 +15,39 @@ export function CardsList() {
 
   const bottomOfList = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   if (!token) return;
+  let count = 0;
 
-  //   load();
-  // }, [token]);
+  async function load() {
+    setLoading(true);
+    setErrorLoading('');
+    count ++;
+
+    try {
+      const { data: { data: { after, children }}} = await axios.get('https://oauth.reddit.com/rising', {
+        headers: {Authorization: `bearer ${token}`},
+        params: {
+          limit: 10,
+          after: nextAfter,
+        }
+      });
+
+      setNextAfter(after);
+      setPosts(prevChildren => prevChildren.concat(...children));
+      console.log('response', { data: { data: { children }}})
+      console.log(count)
+
+    } catch (error) {
+      setErrorLoading(String(error));
+      console.log(error)
+    }
+
+    setLoading(false)
+  }
 
   useEffect(() => {
-    async function load() {
-      setLoading(true);
-      setErrorLoading('');
 
-      try {
-        const { data: { data: { after, children }}} = await axios.get('https://oauth.reddit.com/rising', {
-          headers: {Authorization: `bearer ${token}`},
-          params: {
-            limit: 10,
-            after: nextAfter,
-          }
-        });
-
-        setNextAfter(after);
-        setPosts(prevChildren => prevChildren.concat(...children));
-        console.log('response', { data: { data: { children }}})
-      } catch (error) {
-        setErrorLoading(String(error));
-        console.log(error)
-      }
-
-      setLoading(false)
-    }
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
+      if (entries[0].isIntersecting && count < 3) {
         load();
       }
     }, {
@@ -80,11 +81,16 @@ export function CardsList() {
           authorIcon={post.data.authorIcon}
           score={post.data.score}
           preview={post.data.preview}
-          commentsCount={post.data.commentsCount}
+          // preview={post.data.preview.images[0].source.url}
+          commentsCount={post.data.num_comments}
         />
       ))}
 
-      <div ref={bottomOfList}/>
+
+      { count = 2
+          ? (<button onClick={load()}>загрузить еще</button>)
+          : (<div ref={bottomOfList}/>)
+      }
 
       {loading && (
         <div style={{textAlign: 'center'}}>Загрузка...</div>
