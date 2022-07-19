@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { entries } from '../../../webpack.config';
 import { RootState } from '../../store/reducer';
 import { Card } from './Card/Card';
-import styles from './cardsList.css';
+import styles from './cardsList.module.css';
 
 export function CardsList() {
   const token = useSelector<RootState>(state => state.token);
@@ -15,12 +15,14 @@ export function CardsList() {
 
   const bottomOfList = useRef<HTMLDivElement>(null);
 
-  let count = 0;
+  const [count, setCount] = useState(0);
+
+  // let count = 0;
 
   async function load() {
     setLoading(true);
     setErrorLoading('');
-    count ++;
+    setCount(count + 1);
 
     try {
       const { data: { data: { after, children }}} = await axios.get('https://oauth.reddit.com/rising', {
@@ -87,10 +89,13 @@ export function CardsList() {
       ))}
 
 
-      { count = 2
-          ? (<button onClick={load()}>загрузить еще</button>)
+      <div ref={bottomOfList}/>
+
+      {/* { count = 2 */}
+      {/* {setCount() = 2
+          ? (<button onClick={() => load()}>загрузить еще</button>)
           : (<div ref={bottomOfList}/>)
-      }
+      } */}
 
       {loading && (
         <div style={{textAlign: 'center'}}>Загрузка...</div>
