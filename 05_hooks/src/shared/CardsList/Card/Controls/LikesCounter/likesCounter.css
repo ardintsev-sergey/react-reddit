@@ -1,7 +1,0 @@
-.likesCounter > * + * {
-  padding: 0 0 0 4px;
-}
-
-.likesValue {
-  color: var(--greyC4);
-}
