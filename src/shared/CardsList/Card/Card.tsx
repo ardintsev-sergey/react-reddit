@@ -1,5 +1,5 @@
 import React from 'react';
-import { IPostContextData } from '../../../context/postsContext';
+// import { IPostContextData } from '../../../context/postsContext';
 import styles from './card.css';
 import { Controls } from './Controls/Controls';
 import { Menu } from './Menu/Menu';
