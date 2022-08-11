@@ -3,3 +3,13 @@
     padding: 40px 0;
   }
 }
+
+.btnMore {
+  width: 220px;
+  height: 50px;
+  align-self: end;
+  padding: 15px;
+  background-color: var(--orange);
+  color: var(--white);
+  display: block;
+}

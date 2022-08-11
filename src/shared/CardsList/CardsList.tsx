@@ -16,45 +16,39 @@ export function CardsList() {
 
   const bottomOfList = useRef<HTMLDivElement>(null);
 
-  const [count, setCount] = useState(0);
-
-  // let count = 0;
-
-  // async function load() {
-  //   usePostsData();
-  //   setLoading(true);
-  //   setErrorLoading('');
-  //   setCount(count + 1);
-
-  //   try {
-  //     const { data: { data: { after, children }}} = await axios.get('https://oauth.reddit.com/rising', {
-  //       headers: {Authorization: `bearer ${token}`},
-  //       params: {
-  //         limit: 10,
-  //         after: nextAfter,
-  //       }
-  //     });
-
-  //     setNextAfter(after);
-  //     setPosts(prevChildren => prevChildren.concat(...children));
-  //     console.log('response', { data: { data: { children }}})
-  //     console.log(count)
-
-  //   } catch (error) {
-  //     setErrorLoading(String(error));
-  //     console.log(error)
-  //   }
-
-  //   setLoading(false)
-  // }
   const { data, loading, loaded, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
 
-  console.log(data)
+  const scrollList = () => {
+    // setLoaded(loaded + 1);
+    // console.log(loaded)
+    var scrollHeight=document.documentElement.scrollHeight;
+    var clientHeight=document.documentElement.clientHeight;
+    var height = scrollHeight - document.documentElement.scrollTop
+    console.log(scrollHeight, clientHeight, height, document.documentElement.scrollTop);
+    setLoaded(loaded + 1);
+      console.log(loaded)
+    if (height === clientHeight) {
+      console.log('конец страницы');
+      setLoaded(loaded + 1);
+      console.log(loaded)
+    }
+
+  }
+  if (typeof window !== "undefined") {
+    window.addEventListener('onscroll', () =>
+        scrollList()
+    )
+  }
+
 
   useEffect(() => {
+    window.addEventListener('onscroll', () =>
+      scrollList()
+    )
 
     const observer = new IntersectionObserver((entries) => {
       // usePostsData(loadHandler(setLoaded(loaded + 1)))
+
       if (entries[0].isIntersecting && loaded < 3) {
         loadHandler();
       }
@@ -71,14 +65,23 @@ export function CardsList() {
         observer.unobserve(bottomOfList.current)
       }
     }
-  }, [bottomOfList.current])
+  }, [bottomOfList.current,
+    // data,
+    // loading,
+    // loaded,
+    // loadHandler,
+    // fetchData,
+    // setLoaded,
+    // errorLoading
+  ])
 
   return (
-    <ul className={styles.cardsList}>
+    <ul className={styles.cardsList} onScroll={scrollList}>
       {/* {children && children.map((child) => <Card key={child.id} postData={child}/>)} */}
       {data.length === 0 && !loading && !errorLoading && (
         <div style={{textAlign: 'center'}}>Нет ни одного поста</div>
       )}
+      <button onClick={scrollList} className={styles.btnMore}>кнопка setLoaded + 1</button>
       {data.map(post => (
         <Card
           key={post.id}
@@ -97,11 +100,10 @@ export function CardsList() {
 
       <div ref={bottomOfList}/>
 
-      {/* { count = 2 */}
-      {/* {setCount() = 2
-          ? (<button onClick={() => usePostsData.loadHandler()}>загрузить еще</button>)
-          : (<div ref={bottomOfList}/>)
-      } */}
+      {loaded === 2
+          ? <button onClick={loadHandler} className={styles.btnMore}>загрузить еще</button>
+          : <div ref={bottomOfList}/>
+      }
 
       {loading && (
         <div style={{textAlign: 'center'}}>Загрузка...</div>
