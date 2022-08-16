@@ -23,7 +23,12 @@ export function usePostsData() {
         setAfterLoad(after)
       })
       .catch((error) => { setErrorLoading(String(error))})
-      .finally(() => { setLoading(false) })
+      .finally(() => { setLoading(false);
+      // setLoaded(loaded + 1);
+      // console.log(loaded);
+     })
+
+
   }
 
   const loadHandler = () => {
@@ -31,6 +36,6 @@ export function usePostsData() {
     fetchData()
   }
   console.log(data)
-  return { data, loading, loaded, loadHandler, fetchData, setLoaded, errorLoading }
+  return { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading }
 }
 

@@ -8,49 +8,27 @@ import { Card } from './Card/Card';
 import styles from './cardsList.module.css';
 
 export function CardsList() {
-  // const token = useSelector<RootState>(state => state.token);
-  const [posts, setPosts] = useState<any[]>([]);
-  // const [loading, setLoading] = useState(false);
-  // const [errorLoading, setErrorLoading] = useState('');
-  // const [nextAfter, setNextAfter] = useState('');
-
   const bottomOfList = useRef<HTMLDivElement>(null);
 
-  const { data, loading, loaded, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
+  const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
 
   const scrollList = () => {
-    // setLoaded(loaded + 1);
-    // console.log(loaded)
-    var scrollHeight=document.documentElement.scrollHeight;
-    var clientHeight=document.documentElement.clientHeight;
-    var height = scrollHeight - document.documentElement.scrollTop
-    console.log(scrollHeight, clientHeight, height, document.documentElement.scrollTop);
     setLoaded(loaded + 1);
       console.log(loaded)
-    if (height === clientHeight) {
       console.log('конец страницы');
-      setLoaded(loaded + 1);
-      console.log(loaded)
-    }
-
   }
-  if (typeof window !== "undefined") {
-    window.addEventListener('onscroll', () =>
-        scrollList()
-    )
-  }
-
 
   useEffect(() => {
-    window.addEventListener('onscroll', () =>
-      scrollList()
-    )
-
     const observer = new IntersectionObserver((entries) => {
-      // usePostsData(loadHandler(setLoaded(loaded + 1)))
-
-      if (entries[0].isIntersecting && loaded < 3) {
-        loadHandler();
+      if (entries[0].isIntersecting ) {
+        if (afterLoad === '') {
+          fetchData();
+          // scrollList();
+        } else {
+          fetchData();
+          scrollList();
+        }
+        console.log(loaded, afterLoad)
       }
     }, {
       rootMargin: '100px',
@@ -65,15 +43,7 @@ export function CardsList() {
         observer.unobserve(bottomOfList.current)
       }
     }
-  }, [bottomOfList.current,
-    // data,
-    // loading,
-    // loaded,
-    // loadHandler,
-    // fetchData,
-    // setLoaded,
-    // errorLoading
-  ])
+  }, [ bottomOfList.current, afterLoad ])
 
   return (
     <ul className={styles.cardsList} onScroll={scrollList}>
@@ -81,7 +51,7 @@ export function CardsList() {
       {data.length === 0 && !loading && !errorLoading && (
         <div style={{textAlign: 'center'}}>Нет ни одного поста</div>
       )}
-      <button onClick={scrollList} className={styles.btnMore}>кнопка setLoaded + 1</button>
+      {/* <button onClick={scrollList} className={styles.btnMore}>кнопка setLoaded + 1</button> */}
       {data.map(post => (
         <Card
           key={post.id}
@@ -93,6 +63,7 @@ export function CardsList() {
           score={post.score}
           preview={post.preview}
           // preview={post.preview.images[0].source.url}
+          // [3].preview.images[0].source.url
           commentsCount={post.num_comments}
         />
       ))}
@@ -100,14 +71,14 @@ export function CardsList() {
 
       <div ref={bottomOfList}/>
 
-      {loaded === 2
-          ? <button onClick={loadHandler} className={styles.btnMore}>загрузить еще</button>
-          : <div ref={bottomOfList}/>
-      }
-
       {loading && (
         <div style={{textAlign: 'center'}}>Загрузка...</div>
       )}
+
+      {loaded === 2
+          ? <button onClick={loadHandler} className={styles.btnMore}>Загрузить еще</button>
+          : <div ref={bottomOfList}/>
+      }
 
       {errorLoading && (
         <div role="alert" style={{textAlign: 'center'}}>
