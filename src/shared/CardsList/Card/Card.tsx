@@ -29,7 +29,7 @@ export function Card({ title, author, created, authorId, authorIcon, score, key,
         <TextContent
           title={title}
           postId={key}
-          date={new Date(created)}
+          date={created}
           authorId={authorId}
           author={author}
           authorIcon={authorIcon}
