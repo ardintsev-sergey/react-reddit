@@ -64,11 +64,9 @@ export function CardsList() {
           author={post.author}
           created={post.created}
           authorId={post.authorId}
-          authorIcon={post.authorIcon}
+          authorIcon={post.all_awardings[0]?.icon_url || post.authorIcon}
           score={post.score}
-          preview={post.preview}
-          // preview={post.preview.images[0].source.url}
-          // [3].preview.images[0].source.url
+          preview={post.preview?.images[0].source.url || post.preview}
           commentsCount={post.num_comments}
         />
       ))}
