@@ -1,0 +1,11 @@
+.likesCounter > * + * {
+  padding: 0 0 0 4px;
+}
+
+.likesValue {
+  color: var(--greyC4);
+}
+
+.down {
+  transform: rotate(180deg);
+}
