@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import './main.global.css';
 import { hot } from "react-hot-loader/root";
 import { Layout } from "./shared/Layout/Layout";
@@ -14,46 +14,52 @@ import { rootReducer} from "./store/reducer";
 import { useDispatch } from "react-redux";
 import thunk from "redux-thunk";
 import { saveToken } from "./store/token/action";
-
-// const logger: Middleware = (store) => (next) => (action) => {
-//   console.log('dispatching:', action);
-//   const returnValue = next(action);
-//   console.log('action after next:', returnValue);
-// }
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Post } from "./shared/Post";
+import Error from "./shared/Error/Error";
 
 export const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
 ));
 
-// const timeout = (ms: number): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, _getState) => {
-//   dispatch({ type: 'START' });
-//   setTimeout(() => {
-//     dispatch({ type: 'FINISH' });
-//   }, ms);
-// }
-
 function AppComponent() {
   const dispatch = useDispatch<any>();
-  // useEffect(() => {
-  //   if (window.__token__) {
-  //     dispatch(setToken(window.__token__));
-  //   };
-  //   // @ts-ignore
-  //   // store.dispatch(timeout(5000));
-  //   }, []);
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true)
+  },[]);
 
   dispatch(saveToken());
+
   return (
-          <UserContextProvider>
-            <PostsContextProvider>
-            <Layout>
-              <Header/>
-              <Content>
-                <CardsList />
-              </Content>
-            </Layout>
-            </PostsContextProvider>
-          </UserContextProvider>
+    {mounted} && (
+      <BrowserRouter>
+        <UserContextProvider>
+          <PostsContextProvider>
+          <Layout>
+            <Header/>
+            <Content>
+              <Routes>
+                <Route path="/posts/">
+                  <CardsList />
+                </Route>
+                <Route path="/posts/:id">
+                  <Post />
+                </Route>
+                <Route path="/error">
+                  <Error />
+                </Route>
+                <Route path="/auth/" element={<Navigate to="/posts" replace />} />
+                <Route path="/*" element={<Navigate to="/error" replace />} />
+              </Routes>
+            </Content>
+          </Layout>
+          </PostsContextProvider>
+        </UserContextProvider>
+      </BrowserRouter>
+    )
   );
 }
 

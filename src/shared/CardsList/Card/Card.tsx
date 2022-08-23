@@ -16,6 +16,7 @@ interface Props {
   key: string;
   preview: string;
   commentsCount: number;
+  onClick: () => void;
 }
 
 export function Card({ title, author, created, authorId, authorIcon, score, key, preview, commentsCount }: Props) {

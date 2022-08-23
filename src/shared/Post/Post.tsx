@@ -1,22 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CommentFormContainer } from '../CommentFormContainer';
 import styles from './post.css';
 import { PostComments } from './PostComments/PostComments';
 import { PostHeader } from './PostHeader/PostHeader';
 
-interface IPost{
-  onClose?: () => void;
-}
-
-export function Post(props: IPost) {
+export function Post() {
   const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const params = useParams()
+  console.log(params);
+
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
         console.log('clicked out')
-        props.onClose?.();
+        navigate('/', { replace: true });
       }
     }
 

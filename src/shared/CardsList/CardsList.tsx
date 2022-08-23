@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { entries } from '../../../webpack.config';
 import { usePostsData } from '../../hooks/usePostsData';
 import { RootState } from '../../store/reducer';
@@ -11,6 +12,7 @@ export function CardsList() {
   const bottomOfList = useRef<HTMLDivElement>(null);
 
   const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
+  const navigate = useNavigate()
 
   if (data[1] !== undefined) {
     console.log(data[1].preview.images[0].source.url);
@@ -68,6 +70,7 @@ export function CardsList() {
           score={post.score}
           preview={post.preview?.images[0].source.url || post.preview}
           commentsCount={post.num_comments}
+          onClick={() => navigate(`/posts/${post.id}`)}
         />
       ))}
 

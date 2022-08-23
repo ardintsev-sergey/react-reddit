@@ -8,13 +8,6 @@ const app = express();
 
 app.use('/static', express.static('./dist/client'));
 
-app.get('/', (req, res) => {
-  req.query.code;
-  res.send(
-   indexHTMLTemplate(ReactDOM.renderToString(App())),
-  );
-});
-
 app.get('/auth', (req, res) => {
   axios.post(
     'https://www.reddit.com/api/v1/access_token',
@@ -29,7 +22,13 @@ app.get('/auth', (req, res) => {
       indexHTMLTemplate(ReactDOM.renderToString(App()), data['access_token']),
      );
   });
-  
+});
+
+app.get('*', (req, res) => {
+  req.query.code;
+  res.send(
+   indexHTMLTemplate(ReactDOM.renderToString(App())),
+  );
 });
 
 app.listen(3000, () => {
