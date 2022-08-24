@@ -35,22 +35,17 @@ function AppComponent() {
 
   return (
     {mounted} && (
-      <BrowserRouter>
+      // <BrowserRouter>
         <UserContextProvider>
           <PostsContextProvider>
           <Layout>
             <Header/>
             <Content>
               <Routes>
-                <Route path="/posts/">
-                  <CardsList />
-                </Route>
-                <Route path="/posts/:id">
-                  <Post />
-                </Route>
-                <Route path="/error">
-                  <Error />
-                </Route>
+                <Route path="/posts/" element={<CardsList/>} />
+                  {/* <CardsList /> */}
+                <Route path="/posts/:id" element={<Post />} />
+                <Route path="/error" element={<Error />} />
                 <Route path="/auth/" element={<Navigate to="/posts" replace />} />
                 <Route path="/*" element={<Navigate to="/error" replace />} />
               </Routes>
@@ -58,12 +53,14 @@ function AppComponent() {
           </Layout>
           </PostsContextProvider>
         </UserContextProvider>
-      </BrowserRouter>
+      // </BrowserRouter>
     )
   );
 }
 
 export const App = hot(() =>
   <Provider store={store}>
-    <AppComponent />
+    {/* <BrowserRouter> */}
+      <AppComponent />
+    {/* </BrowserRouter> */}
   </Provider>);
