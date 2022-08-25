@@ -17,7 +17,7 @@ export function Post() {
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
         console.log('clicked out')
-        navigate('/', { replace: true });
+        navigate('/posts', { replace: true });
       }
     }
 

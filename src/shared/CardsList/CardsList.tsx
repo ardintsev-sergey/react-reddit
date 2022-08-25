@@ -14,10 +14,6 @@ export function CardsList() {
   const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
   const navigate = useNavigate()
 
-  if (data[1] !== undefined) {
-    console.log(data[1].preview.images[0].source.url);
-  }
-
   const scrollList = () => {
     setLoaded(loaded + 1);
       console.log(loaded)
@@ -58,8 +54,7 @@ export function CardsList() {
         <div style={{textAlign: 'center'}}>Нет ни одного поста</div>
       )}
       {/* <button onClick={scrollList} className={styles.btnMore}>кнопка setLoaded + 1</button> */}
-      {data[1] !== undefined &&
-        data.map(post => (
+      {data.map(post => (
         <Card
           key={post.id}
           title={post.title}

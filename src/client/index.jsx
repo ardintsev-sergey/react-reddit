@@ -5,7 +5,8 @@ import { App } from '../App';
 
 window.addEventListener('load', () => {
   ReactDOM.hydrate(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>, document.getElementById('react_root'));
+    // <BrowserRouter>
+      <App />,
+    // </BrowserRouter>
+     document.getElementById('react_root'));
 })

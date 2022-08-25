@@ -22,7 +22,9 @@ export function TextContent({ title, author, date, authorId, authorIcon, postId 
           author={author}
           authorIcon={authorIcon}
           />
-        <Title title={title}/>
+        <Title
+          title={title}
+          postId={postId}/>
       </div>
   )
 }

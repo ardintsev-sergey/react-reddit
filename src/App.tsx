@@ -34,33 +34,36 @@ function AppComponent() {
   dispatch(saveToken());
 
   return (
-    {mounted} && (
-      // <BrowserRouter>
-        <UserContextProvider>
-          <PostsContextProvider>
-          <Layout>
-            <Header/>
-            <Content>
-              <Routes>
-                <Route path="/posts/" element={<CardsList/>} />
-                  {/* <CardsList /> */}
-                <Route path="/posts/:id" element={<Post />} />
-                <Route path="/error" element={<Error />} />
-                <Route path="/auth/" element={<Navigate to="/posts" replace />} />
-                <Route path="/*" element={<Navigate to="/error" replace />} />
-              </Routes>
-            </Content>
-          </Layout>
-          </PostsContextProvider>
-        </UserContextProvider>
-      // </BrowserRouter>
-    )
-  );
-}
+    // <Provider store={store}>
+    <>
+      {mounted && (
+        <BrowserRouter>
+          <UserContextProvider>
+            <PostsContextProvider>
+              <Layout>
+                <Header/>
+                <Content>
+                {/* <CardsList/> */}
+                  <Routes>
+                    <Route path="/posts/" element={<CardsList/>} />
+                    <Route path="/posts/:id" element={<Post />} />
+                    <Route path="/error" element={<Error />} />
+                    <Route path="/auth/" element={<Navigate to="/posts" replace />} />
+                    <Route path="/*" element={<Navigate to="/error" replace />} />
+                  </Routes>
+                </Content>
+              </Layout>
+            </PostsContextProvider>
+          </UserContextProvider>
+        </BrowserRouter>
+      )}
+    </>
+    // </Provider>
+    );
+  }
 
 export const App = hot(() =>
   <Provider store={store}>
-    {/* <BrowserRouter> */}
       <AppComponent />
-    {/* </BrowserRouter> */}
   </Provider>);
+
