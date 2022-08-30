@@ -12,6 +12,9 @@ export function CardsList() {
   const bottomOfList = useRef<HTMLDivElement>(null);
 
   const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
+  console.log(data[0]);
+  // console.log(data[0].id);
+
   const navigate = useNavigate()
 
   const scrollList = () => {
@@ -57,6 +60,7 @@ export function CardsList() {
       {data.map(post => (
         <Card
           key={post.id}
+          id={post.id}
           title={post.title}
           author={post.author}
           created={post.created}

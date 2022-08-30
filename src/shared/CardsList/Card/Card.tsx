@@ -16,10 +16,13 @@ interface Props {
   key: string;
   preview: string;
   commentsCount: number;
+  id: string;
   onClick: () => void;
 }
 
-export function Card({ title, author, created, authorId, authorIcon, score, key, preview, commentsCount }: Props) {
+export function Card({ title, author, created, authorId, authorIcon, score, key, preview, commentsCount, id }: Props) {
+  console.log(key);
+
   // const { author, authorIcon, authorId, created, id, preview, score, title, commentsCount } = postData;
   return (
     <li className={styles.card}>
@@ -29,7 +32,7 @@ export function Card({ title, author, created, authorId, authorIcon, score, key,
         />
         <TextContent
           title={title}
-          postId={key}
+          postId={id}
           date={created}
           authorId={authorId}
           author={author}
