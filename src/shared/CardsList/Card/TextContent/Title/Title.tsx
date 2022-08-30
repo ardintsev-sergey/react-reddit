@@ -9,7 +9,9 @@ interface ITitleProps {
 }
 
 export function Title({title, postId}: ITitleProps) {
-  // console.log(postId)
+  // console.log(title);
+  // console.log(postId);
+
   return(
     <h2 className={styles.title}>
           <Link to={`/posts/${postId}`} className={styles.postLink} >

@@ -24,11 +24,7 @@ export function usePostsData() {
       })
       .catch((error) => { setErrorLoading(String(error))})
       .finally(() => { setLoading(false);
-      // setLoaded(loaded + 1);
-      // console.log(loaded);
      })
-
-
   }
 
   const loadHandler = () => {
@@ -37,5 +33,25 @@ export function usePostsData() {
   }
   console.log(data)
   return { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading }
+
 }
 
+// export const fetchPostData = async (id?: string) => {
+//   const token = useSelector<RootState>(store => store.token)
+//   if(!token) return
+//   const response = await axios.get('https://jsonplaceholder.typicode.com/posts/' + id );
+//     console.log(response);
+
+//         return response;
+  // setLoading(true)
+  // axios.get('https://oauth.reddit.com/best' + id, {
+  //   headers: { Authorization: `bearer ${token}` }
+  // })
+  //   .then(({ data: { data: { after, children } } }) => {
+      // setData(prevData => prevData.concat(...children.map((el: {data: []}) => el.data)))
+      // setAfterLoad(after)
+    // })
+    // .catch((error) => { setErrorLoading(String(error))})
+    // .finally(() => { setLoading(false);
+  //  })
+// }

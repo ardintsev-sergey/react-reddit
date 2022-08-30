@@ -1,17 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { RootState } from '../../store/reducer';
 import { CommentFormContainer } from '../CommentFormContainer';
 import styles from './post.css';
 import { PostComments } from './PostComments/PostComments';
 import { PostHeader } from './PostHeader/PostHeader';
 
+
 export function Post() {
+  const token = useSelector<RootState>(store => store.token)
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const params = useParams()
+  const [post, setPost] = useState({})
   console.log(params);
-
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -26,6 +31,18 @@ export function Post() {
     return () => {
       document.removeEventListener('click', handleClick)
     }
+  }, [])
+
+ async function fetchPostData(id?: string)  {
+  const response = await axios.get('https://oauth.reddit.com/best/' + id, {
+    headers: { Authorization: `bearer ${token}` }
+  } );
+    console.log(response);
+    setPost(response.data);
+ }
+
+  useEffect(() => {
+    fetchPostData(params.id)
   }, [])
 
 

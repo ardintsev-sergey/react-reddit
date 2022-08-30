@@ -1,10 +1,7 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { entries } from '../../../webpack.config';
+import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePostsData } from '../../hooks/usePostsData';
-import { RootState } from '../../store/reducer';
 import { Card } from './Card/Card';
 import styles from './cardsList.module.css';
 
@@ -12,8 +9,9 @@ export function CardsList() {
   const bottomOfList = useRef<HTMLDivElement>(null);
 
   const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
-  console.log(data[0]);
+  // console.log(data[0]);
   // console.log(data[0].id);
+  // console.log(data[0].title);
 
   const navigate = useNavigate()
 
@@ -52,15 +50,14 @@ export function CardsList() {
 
   return (
     <ul className={styles.cardsList} onScroll={scrollList}>
-      {/* {children && children.map((child) => <Card key={child.id} postData={child}/>)} */}
       {data.length === 0 && !loading && !errorLoading && (
         <div style={{textAlign: 'center'}}>Нет ни одного поста</div>
       )}
-      {/* <button onClick={scrollList} className={styles.btnMore}>кнопка setLoaded + 1</button> */}
+
       {data.map(post => (
         <Card
           key={post.id}
-          id={post.id}
+          postId={post.id}
           title={post.title}
           author={post.author}
           created={post.created}

@@ -14,6 +14,9 @@ interface ITextContentProps {
 }
 
 export function TextContent({ title, author, date, authorId, authorIcon, postId }: ITextContentProps) {
+  // console.log(title);
+  // console.log(postId);
+
   return (
     <div className={styles.textContent}>
         <MetaData
