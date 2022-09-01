@@ -5,7 +5,7 @@ import { usePostsData } from '../../hooks/usePostsData';
 import { Card } from './Card/Card';
 import styles from './cardsList.module.css';
 
-export function CardsList() {
+export function CardsList(updatePost) {
   const bottomOfList = useRef<HTMLDivElement>(null);
 
   const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
@@ -58,6 +58,7 @@ export function CardsList() {
         <Card
           key={post.id}
           postId={post.id}
+          post={() => updatePost(post)}
           title={post.title}
           author={post.author}
           created={post.created}

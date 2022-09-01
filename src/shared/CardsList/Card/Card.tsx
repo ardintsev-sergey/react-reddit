@@ -18,10 +18,12 @@ interface Props {
   commentsCount: number;
   postId: string;
   onClick: () => void;
+  post: {};
 }
 
-export function Card({ title, author, created, authorId, authorIcon, score, key, preview, commentsCount, postId }: Props) {
-  // console.log(title);
+export function Card({ title, author, created, authorId, authorIcon, score, key, preview, commentsCount, postId, post }: Props) {
+  console.log(post);
+  const MyContext = React.createContext(post);
   // console.log(postId);
 
   // const { author, authorIcon, authorId, created, id, preview, score, title, commentsCount } = postData;

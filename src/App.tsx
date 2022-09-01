@@ -26,6 +26,7 @@ function AppComponent() {
   const dispatch = useDispatch<any>();
 
   const [mounted, setMounted] = useState(false);
+  const [post, setPost] = useState()
 
   useEffect(() => {
     setMounted(true)
@@ -34,7 +35,6 @@ function AppComponent() {
   dispatch(saveToken());
 
   return (
-    // <Provider store={store}>
     <>
       {mounted && (
         <BrowserRouter>
@@ -43,10 +43,9 @@ function AppComponent() {
               <Layout>
                 <Header/>
                 <Content>
-                {/* <CardsList/> */}
                   <Routes>
-                    <Route path="/posts/" element={<CardsList/>} />
-                    <Route path="/posts/:id" element={<Post />} />
+                    <Route path="/posts/" element={<CardsList updatePost={setPost(updatePost)}/>} />
+                    <Route path="/posts/:id" element={<Post post={post}/>} />
                     <Route path="/error" element={<Error />} />
                     <Route path="/auth/" element={<Navigate to="/posts" replace />} />
                     <Route path="/*" element={<Navigate to="/error" replace />} />
@@ -58,7 +57,6 @@ function AppComponent() {
         </BrowserRouter>
       )}
     </>
-    // </Provider>
     );
   }
 
