@@ -26,7 +26,7 @@ function AppComponent() {
   const dispatch = useDispatch<any>();
 
   const [mounted, setMounted] = useState(false);
-  const [post, setPost] = useState()
+  // const [post, setPost] = useState()
 
   useEffect(() => {
     setMounted(true)
@@ -44,8 +44,8 @@ function AppComponent() {
                 <Header/>
                 <Content>
                   <Routes>
-                    <Route path="/posts/" element={<CardsList updatePost={setPost(updatePost)}/>} />
-                    <Route path="/posts/:id" element={<Post post={post}/>} />
+                    <Route path="/posts/" element={<CardsList />} />
+                    <Route path="/posts/:id" element={<Post />} />
                     <Route path="/error" element={<Error />} />
                     <Route path="/auth/" element={<Navigate to="/posts" replace />} />
                     <Route path="/*" element={<Navigate to="/error" replace />} />

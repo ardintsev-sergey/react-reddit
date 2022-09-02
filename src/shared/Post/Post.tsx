@@ -3,14 +3,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { usePostsData } from '../../hooks/usePostsData';
 import { RootState } from '../../store/reducer';
 import { CommentFormContainer } from '../CommentFormContainer';
 import styles from './post.css';
 import { PostComments } from './PostComments/PostComments';
 import { PostHeader } from './PostHeader/PostHeader';
 
+// const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
 
-export function Post(post) {
+export function Post() {
   const token = useSelector<RootState>(store => store.token)
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ export function Post(post) {
     }
   }, [])
 
+
 //  async function fetchPostData(id?: string)  {
 //   const response = await axios.get('https://www.reddit.com/r/javascript/comments/' + id, {
 //     headers: { Authorization: `bearer ${token}` }
@@ -46,11 +49,22 @@ export function Post(post) {
   // }, [])
 
 
+
+
+
   const node = document.querySelector('#modal_root');
   if (!node) return null;
   return ReactDOM.createPortal((
     <div className={styles.modal} ref={ref} >
-      <PostHeader title={post.title}/>
+      {/* {data.map(post => (
+        <PostHeader
+          key={post.id}
+          postId={post.id}
+          // post={() => updatePost(post)}
+          title={post.title}
+        />
+      ))} */}
+      <PostHeader />
 
       <div className={styles.content}>
         <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>

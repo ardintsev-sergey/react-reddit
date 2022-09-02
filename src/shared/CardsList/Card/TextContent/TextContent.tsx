@@ -20,7 +20,7 @@ export function TextContent({ title, author, date, authorId, authorIcon, postId 
   return (
     <div className={styles.textContent}>
         <MetaData
-          date={new Date(date)}
+          date={date}
           authorId={authorId}
           author={author}
           authorIcon={authorIcon}

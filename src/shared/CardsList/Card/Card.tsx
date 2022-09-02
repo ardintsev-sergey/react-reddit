@@ -13,17 +13,16 @@ interface Props {
   authorId: string;
   authorIcon: string;
   score: number;
-  key: string;
   preview: string;
   commentsCount: number;
   postId: string;
   onClick: () => void;
-  post: {};
+  // post: {};
 }
 
-export function Card({ title, author, created, authorId, authorIcon, score, key, preview, commentsCount, postId, post }: Props) {
-  console.log(post);
-  const MyContext = React.createContext(post);
+export function Card({ title, author, created, authorId, authorIcon, score, preview, commentsCount, postId }: Props) {
+  // console.log(post);
+  // const PostContext = React.createContext(post);
   // console.log(postId);
 
   // const { author, authorIcon, authorId, created, id, preview, score, title, commentsCount } = postData;
@@ -43,7 +42,7 @@ export function Card({ title, author, created, authorId, authorIcon, score, key,
         />
       </div>
       <Menu
-        postId={key}
+        postId={postId}
       />
       <Controls
         score={score}
