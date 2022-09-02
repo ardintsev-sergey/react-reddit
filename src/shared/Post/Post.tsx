@@ -8,9 +8,8 @@ import { RootState } from '../../store/reducer';
 import { CommentFormContainer } from '../CommentFormContainer';
 import styles from './post.css';
 import { PostComments } from './PostComments/PostComments';
+import PostDescr from './PostDescr/PostDescr';
 import { PostHeader } from './PostHeader/PostHeader';
-
-// const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
 
 export function Post() {
   const token = useSelector<RootState>(store => store.token)
@@ -20,7 +19,13 @@ export function Post() {
   // const [post, setPost] = useState({})
   console.log(params);
 
+  const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
+  console.log(data[3]?.selftext);
+  console.log(data[0]?.url);
+
   useEffect(() => {
+    fetchData()
+    console.log(data);
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
         console.log('clicked out')
@@ -48,28 +53,28 @@ export function Post() {
   //   fetchPostData(params.id)
   // }, [])
 
-
-
-
-
   const node = document.querySelector('#modal_root');
   if (!node) return null;
   return ReactDOM.createPortal((
     <div className={styles.modal} ref={ref} >
-      {/* {data.map(post => (
-        <PostHeader
-          key={post.id}
-          postId={post.id}
-          // post={() => updatePost(post)}
-          title={post.title}
-        />
-      ))} */}
-      <PostHeader />
+      {data.length === 0 && !loading && !errorLoading && (
+        <div style={{textAlign: 'center'}}>Нет ни одного поста</div>
+      )}
+
+      {loading && (
+        <div style={{textAlign: 'center'}}>Загрузка...</div>
+      )}
+
+      {errorLoading && (
+        <div role="alert" style={{textAlign: 'center'}}>
+          {errorLoading}
+        </div>
+      )}
+
+      <PostHeader title={data[0]?.title} />
 
       <div className={styles.content}>
-        <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>
-        <p>Есть над чем задуматься: тщательное исследовани...</p>
-        <p>Есть над чем задуматься: тщательное исследовани...</p>
+        <PostDescr descr={data[0]?.selftext} url={data[0]?.url} />
       </div>
 
       <CommentFormContainer />

@@ -1,10 +1,14 @@
 import React from 'react';
 
-export function PostHeader() {
+interface Props {
+  title: string
+}
+
+export function PostHeader(title: Props) {
   return (
     <>
-    {/* <h1>{title}</h1> */}
-    <h2>Следует отметить, что новая модель организационной деятельности поможет</h2>
+    <h1>{Object.values(title)}</h1>
+    {/* <h2>Следует отметить, что новая модель организационной деятельности поможет</h2> */}
     </>
 
 
