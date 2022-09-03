@@ -26,7 +26,6 @@ function AppComponent() {
   const dispatch = useDispatch<any>();
 
   const [mounted, setMounted] = useState(false);
-  // const [post, setPost] = useState()
 
   useEffect(() => {
     setMounted(true)

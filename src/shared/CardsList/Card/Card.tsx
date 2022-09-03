@@ -17,15 +17,10 @@ interface Props {
   commentsCount: number;
   postId: string;
   onClick: () => void;
-  // post: {};
 }
 
 export function Card({ title, author, created, authorId, authorIcon, score, preview, commentsCount, postId }: Props) {
-  // console.log(post);
-  // const PostContext = React.createContext(post);
-  // console.log(postId);
 
-  // const { author, authorIcon, authorId, created, id, preview, score, title, commentsCount } = postData;
   return (
     <li className={styles.card}>
       <div className={styles.cardTop}>
@@ -51,10 +46,3 @@ export function Card({ title, author, created, authorId, authorIcon, score, prev
     </li>
   )
 }
-
-
-//       <Controls>
-//         <KarmaCounter score={score} />
-//         <CommentsButton count={commentsCount} />
-//         <Actions />
-//       </Controls>

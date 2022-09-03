@@ -10,7 +10,6 @@ export function usePostsData() {
   const [data, setData] = useState<any[]>([])
   const [afterLoad, setAfterLoad] = useState('')
   const [errorLoading, setErrorLoading] = useState('');
-  // console.log(token);
   const fetchData = () => {
     if(!token) return
     setLoading(true)
@@ -31,27 +30,7 @@ export function usePostsData() {
     setLoaded(0)
     fetchData()
   }
-  console.log(data)
+
   return { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading }
 
 }
-
-// export const fetchPostData = async (id?: string) => {
-//   const token = useSelector<RootState>(store => store.token)
-//   if(!token) return
-//   const response = await axios.get('https://jsonplaceholder.typicode.com/posts/' + id );
-//     console.log(response);
-
-//         return response;
-  // setLoading(true)
-  // axios.get('https://oauth.reddit.com/best' + id, {
-  //   headers: { Authorization: `bearer ${token}` }
-  // })
-  //   .then(({ data: { data: { after, children } } }) => {
-      // setData(prevData => prevData.concat(...children.map((el: {data: []}) => el.data)))
-      // setAfterLoad(after)
-    // })
-    // .catch((error) => { setErrorLoading(String(error))})
-    // .finally(() => { setLoading(false);
-  //  })
-// }

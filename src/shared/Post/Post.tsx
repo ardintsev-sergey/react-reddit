@@ -1,10 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePostsData } from '../../hooks/usePostsData';
-import { RootState } from '../../store/reducer';
 import { CommentFormContainer } from '../CommentFormContainer';
 import styles from './post.css';
 import { PostComments } from './PostComments/PostComments';
@@ -12,16 +9,12 @@ import PostDescr from './PostDescr/PostDescr';
 import { PostHeader } from './PostHeader/PostHeader';
 
 export function Post() {
-  const token = useSelector<RootState>(store => store.token)
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const params = useParams()
-  // const [post, setPost] = useState({})
-  console.log(params);
 
   const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
-  console.log(data[3]?.selftext);
-  console.log(data[0]?.url);
+  let currentPost= data.find(item => item.id == params.id)
 
   useEffect(() => {
     fetchData()
@@ -39,19 +32,6 @@ export function Post() {
       document.removeEventListener('click', handleClick)
     }
   }, [])
-
-
-//  async function fetchPostData(id?: string)  {
-//   const response = await axios.get('https://www.reddit.com/r/javascript/comments/' + id, {
-//     headers: { Authorization: `bearer ${token}` }
-//   } );
-//     console.log(response);
-//     setPost(response.data);
-//  }
-
-  // useEffect(() => {
-  //   fetchPostData(params.id)
-  // }, [])
 
   const node = document.querySelector('#modal_root');
   if (!node) return null;
@@ -71,10 +51,10 @@ export function Post() {
         </div>
       )}
 
-      <PostHeader title={data[0]?.title} />
+      <PostHeader title={currentPost?.title} />
 
       <div className={styles.content}>
-        <PostDescr descr={data[0]?.selftext} url={data[0]?.url} />
+        <PostDescr descr={currentPost?.selftext} url={currentPost?.url} />
       </div>
 
       <CommentFormContainer />

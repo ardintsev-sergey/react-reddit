@@ -5,7 +5,6 @@ import { Title } from './Title/Title';
 
 interface ITextContentProps {
   postId: string;
-  // text: string;
   date: Date;
   author: string;
   authorId: string;
@@ -14,8 +13,6 @@ interface ITextContentProps {
 }
 
 export function TextContent({ title, author, date, authorId, authorIcon, postId }: ITextContentProps) {
-  // console.log(title);
-  // console.log(postId);
 
   return (
     <div className={styles.textContent}>

@@ -9,9 +9,6 @@ export function CardsList() {
   const bottomOfList = useRef<HTMLDivElement>(null);
 
   const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
-  // console.log(data[0]);
-  // console.log(data[0].id);
-  // console.log(data[0].title);
 
   const navigate = useNavigate()
 
@@ -26,7 +23,6 @@ export function CardsList() {
       if (entries[0].isIntersecting ) {
         if (afterLoad === '') {
           fetchData();
-          // scrollList();
         } else {
           fetchData();
           scrollList();
@@ -58,7 +54,6 @@ export function CardsList() {
         <Card
           key={post.id}
           postId={post.id}
-          // post={() => updatePost(post)}
           title={post.title}
           author={post.author}
           created={new Date(parseInt(post.created_utc) * 1000)}
