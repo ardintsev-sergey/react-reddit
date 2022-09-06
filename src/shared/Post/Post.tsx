@@ -38,7 +38,7 @@ export function Post() {
   return ReactDOM.createPortal((
     <div className={styles.modal} ref={ref} >
       {data.length === 0 && !loading && !errorLoading && (
-        <div style={{textAlign: 'center'}}>Нет ни одного поста</div>
+        <div style={{textAlign: 'center'}}>Нет содержимого поста</div>
       )}
 
       {loading && (

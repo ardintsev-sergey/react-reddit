@@ -19,18 +19,13 @@ export function CardsList() {
   }
 
   useEffect(() => {
-    console.log('я вызвался');
-
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting ) {
-        console.log('и я вызвался');
         if (afterLoad === '') {
           fetchData();
-          console.log('я тоже вызвался');
         } else {
           fetchData();
           scrollList();
-          console.log('я туда же');
         }
         console.log(loaded, afterLoad)
       }
@@ -48,10 +43,9 @@ export function CardsList() {
       }
     }
   }, [
-    // bottomOfList.current,
-    bottomOfList,
-     afterLoad
-     ])
+      bottomOfList,
+      afterLoad
+    ])
 
   return (
     <ul className={styles.cardsList}>
