@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --progress",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
@@ -19,9 +22,7 @@
     "nodemon": "^2.0.16",
     "react": "^17.0.2",
     "react-dom": "^17.0.1",
-    "webpack-node-externals": "^3.0.0"
-  },
-  "devDependencies": {
+    "webpack-node-externals": "^3.0.0",
     "@hot-loader/react-dom": "^17.0.1",
     "@redux-devtools/extension": "^3.2.3",
     "@svgr/webpack": "^6.2.1",
@@ -58,5 +59,8 @@
     "webpack-dev-middleware": "^3.7.3",
     "webpack-dev-server": "^3.10.3",
     "webpack-hot-middleware": "^2.25.0"
+  },
+  "devDependencies": {
+
   }
 }
