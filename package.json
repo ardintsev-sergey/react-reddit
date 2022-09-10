@@ -8,9 +8,9 @@
   },
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --progress",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "dev": "cross-env NODE_ENV=development CLIENT_ID=ETbnmE0Nvnz6m7rCR9gFUw SECRET=t27Hi8LY2VXxDtxSl1haSho1OANIZA CURRENT_URL=http://localhost:3000/auth node ./bin/dev.js",
-    "start": "cross-env CLIENT_ID=ETbnmE0Nvnz6m7rCR9gFUw SECRET=fyqgqVNoQBqlJj_c25nEeq0lgkiYig CURRENT_URL=https://reddit-list.herokuapp.com/auth node ./dist/server/server.js ",
+    "start": "node ./dist/server/server.js ",
     "test": "npx jest ---watchAll"
   },
   "author": "",
