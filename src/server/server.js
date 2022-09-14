@@ -4,8 +4,11 @@ import axios from 'axios';
 import { App } from '../App';
 import { indexHTMLTemplate } from './indexHTMLTemplate';
 
+/* eslint-disable no-undef */
 export const PORT = process.env.PORT || 3000;
+/* eslint-disable no-undef */
 export const CURRENT_URL = process.env.NODE_ENV === 'production' ? 'https://react-reddit-app-archunter.herokuapp.com/auth' : 'http://localhost:3000/auth';
+/* eslint-disable no-undef */
 export const CLIENT_ID = process.env.NODE_ENV === 'production' ? 'NND_s0VYRmcBTnt4MACW0w' : 'ETbnmE0Nvnz6m7rCR9gFUw';
 
 const app = express();
