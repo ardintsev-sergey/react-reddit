@@ -1,4 +1,5 @@
 import React from 'react';
+import { CLIENT_ID, CURRENT_URL } from '../../../../server/server';
 import { IconAnon } from '../../../Icons/IconAnon';
 import { EColor, Text } from '../../../Text/Text';
 import styles from './userBlock.css';
@@ -12,9 +13,7 @@ interface IUserBlockProps {
 export function UserBlock({ avatarSrc, username, loading }: IUserBlockProps) {
     return (
         <a
-        href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.CLIENT_ID}&response_type=code&state=random_string&redirect_uri=https://react-reddit-app-archunter.herokuapp.com/auth&duration=permanent&scope=read submit identity`}
-        // href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.CLIENT_ID}&response_type=code&state=random_string&redirect_uri=http://localhost:3000/auth&duration=permanent&scope=read submit identity`}
-        // href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${process.env.CURRENT_URL}&duration=permanent&scope=read submit identity`}
+        href={`https://www.reddit.com/api/v1/authorize?client_id=${CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${CURRENT_URL}&duration=permanent&scope=read submit identity`}
         className={styles.userBox}>
             <div className={styles.avatarBox}>
               {avatarSrc

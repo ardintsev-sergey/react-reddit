@@ -4,7 +4,9 @@ import axios from 'axios';
 import { App } from '../App';
 import { indexHTMLTemplate } from './indexHTMLTemplate';
 
-const PORT = process.env.PORT || 3000;
+export const PORT = process.env.PORT || 3000;
+export const CURRENT_URL = process.env.NODE_ENV === 'production' ? 'https://react-reddit-app-archunter.herokuapp.com/auth' : 'http://localhost:3000/auth';
+export const CLIENT_ID = process.env.NODE_ENV === 'production' ? 'NND_s0VYRmcBTnt4MACW0w' : 'ETbnmE0Nvnz6m7rCR9gFUw';
 
 const app = express();
 
@@ -13,11 +15,9 @@ app.use('/static', express.static('./dist/client'));
 app.get('/auth', (req, res) => {
   axios.post(
     'https://www.reddit.com/api/v1/access_token',
-    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=https://react-reddit-app-archunter.herokuapp.com/auth`,
-    // `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://localhost:3000/auth`,
-    // `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${process.env.CURRENT_URL}`,
+    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${CURRENT_URL}`,
     {
-      auth: {username: process.env.CLIENT_ID, password: process.env.SECRET},
+      auth: {username: CLIENT_ID, password: process.env.SECRET},
       headers: {'Content-type': 'application/x-www-form-urlencoded'}
     }
   )
