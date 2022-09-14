@@ -1,5 +1,5 @@
 import React from 'react';
-import { CLIENT_ID, CURRENT_URL } from '../../../../server/server';
+// import { CLIENT_ID, CURRENT_URL } from '../../../../server/server';
 import { IconAnon } from '../../../Icons/IconAnon';
 import { EColor, Text } from '../../../Text/Text';
 import styles from './userBlock.css';
@@ -9,6 +9,9 @@ interface IUserBlockProps {
     username?: string
     loading?: boolean
 }
+
+const CURRENT_URL = process.env.NODE_ENV === 'production' ? 'https://react-reddit-app-archunter.herokuapp.com/auth' : 'http://localhost:3000/auth';
+const CLIENT_ID = process.env.NODE_ENV === 'production' ? 'NND_s0VYRmcBTnt4MACW0w' : 'ETbnmE0Nvnz6m7rCR9gFUw';
 
 export function UserBlock({ avatarSrc, username, loading }: IUserBlockProps) {
     return (
