@@ -1,22 +1,21 @@
 import React from 'react';
-// import { CLIENT_ID, CURRENT_URL } from '../../../../server/server';
+import { CLIENT_ID, CURRENT_URL } from '../../../../../config';
 import { IconAnon } from '../../../Icons/IconAnon';
 import { EColor, Text } from '../../../Text/Text';
 import styles from './userBlock.css';
-
+// import { CLIENT_ID, CURRENT_URL } from '../../../../server/server';
 interface IUserBlockProps {
     avatarSrc?: string
     username?: string
     loading?: boolean
 }
 
-const CURRENT_URL = process.env.NODE_ENV === 'production' ? 'https://react-reddit-app-archunter.herokuapp.com/auth' : 'http://localhost:3000/auth';
-const CLIENT_ID = process.env.NODE_ENV === 'production' ? 'NND_s0VYRmcBTnt4MACW0w' : 'ETbnmE0Nvnz6m7rCR9gFUw';
-
 export function UserBlock({ avatarSrc, username, loading }: IUserBlockProps) {
     return (
         <a
         href={`https://www.reddit.com/api/v1/authorize?client_id=${CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${CURRENT_URL}&duration=permanent&scope=read submit identity`}
+        // href={`https://www.reddit.com/api/v1/authorize?client_id=${CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${CURRENT_URL}&duration=permanent&scope=read submit identity`}
+        // href={`https://www.reddit.com/api/v1/authorize?client_id=ETbnmE0Nvnz6m7rCR9gFUw&response_type=code&state=random_string&redirect_uri=http://localhost:3000/auth&duration=permanent&scope=read submit identity`}
         className={styles.userBox}>
             <div className={styles.avatarBox}>
               {avatarSrc

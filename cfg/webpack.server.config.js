@@ -1,6 +1,7 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const { DefinePlugin } = require("webpack");
+const { CLIENT_ID } = require("../config");
 
 const NODE_ENV = process.env.NODE_ENV;
 const GLOBAL_CSS_REGEXP = /\.global\.css$/;
@@ -57,6 +58,6 @@ module.exports = {
     minimize: false,
   },
   plugins: [
-    new DefinePlugin({ "process.env.CLIENT_ID": `'${process.env.CLIENT_ID}'` }),
+    new DefinePlugin({ "process.env.CLIENT_ID": `'${CLIENT_ID}'` }),
   ],
 };
