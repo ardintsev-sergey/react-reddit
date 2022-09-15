@@ -6,6 +6,11 @@ import { indexHTMLTemplate } from './indexHTMLTemplate';
 import { CLIENT_ID, CURRENT_URL, SECRET } from '../../config';
 
 const PORT = process.env.PORT || 3000;
+const server_port = process.env.PORT || 3000;
+const server_host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+// server.listen(server_port, server_host, function() {
+//     console.log('Listening on port %d', server_port);
+// });
 
 const app = express();
 
@@ -34,6 +39,15 @@ app.get('*', (req, res) => {
   );
 });
 
-app.listen(PORT, () => {
-  console.log(`Server started on http://localhost:${PORT}`)
-})
+// process.env.NODE_ENV === 'production' ?
+
+//   app.listen(PORT, () => {
+//     console.log(`Server started on http://localhost:${PORT}`)
+//   })
+
+// :
+
+app.listen(server_port, server_host, function() {
+  console.log(`Server started on http://${server_host}:${server_port}`);
+});
+
