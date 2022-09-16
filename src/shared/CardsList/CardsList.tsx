@@ -9,6 +9,7 @@ export function CardsList() {
   const bottomOfList = useRef<HTMLDivElement>(null);
 
   const { data, loading, loaded, afterLoad, loadHandler, fetchData, setLoaded, errorLoading } = usePostsData();
+  console.log(data);
 
   const navigate = useNavigate()
 

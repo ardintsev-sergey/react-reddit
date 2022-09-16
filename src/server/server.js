@@ -4,7 +4,10 @@ import axios from 'axios';
 import { App } from '../App';
 import { indexHTMLTemplate } from './indexHTMLTemplate';
 import { CLIENT_ID, CURRENT_URL, SECRET } from '../../config';
+import compression from 'compression'
+import helmet, { contentSecurityPolicy } from 'helmet';
 
+const IS_DEV = process.env.NODE_ENV !== 'production'
 const PORT = process.env.PORT || 3000;
 const server_port = process.env.PORT || 3000;
 const server_host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
@@ -13,6 +16,13 @@ const server_host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localho
 // });
 
 const app = express();
+
+if (!IS_DEV) {
+app.use(compression())
+app.use(helmet({
+  contentSecurityPolicy: false,
+}))
+}
 
 app.use('/static', express.static('./dist/client'));
 
