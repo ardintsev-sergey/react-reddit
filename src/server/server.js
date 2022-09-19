@@ -31,10 +31,10 @@ app.get('/auth', (req, res) => {
   axios
     .post(
       'https://www.reddit.com/api/v1/access_token',
-      `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${env.CURRENT_URL}`,
+      `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${CURRENT_URL}`,
       // `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${CURRENT_URL}`,
       {
-        auth: {username: env.CLIENT_ID, password: env.SECRET},
+        auth: {username: CLIENT_ID, password: SECRET},
         headers: {'Content-type': 'application/x-www-form-urlencoded'}
       }
     )
