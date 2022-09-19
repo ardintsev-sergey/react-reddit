@@ -6,6 +6,7 @@ import { indexHTMLTemplate } from './indexHTMLTemplate';
 import { CLIENT_ID, CURRENT_URL, SECRET } from '../../config';
 import compression from 'compression'
 import helmet, { contentSecurityPolicy } from 'helmet';
+import { env } from 'process';
 
 const IS_DEV = process.env.NODE_ENV !== 'production'
 const PORT = process.env.PORT || 3000;
@@ -30,9 +31,10 @@ app.get('/auth', (req, res) => {
   axios
     .post(
       'https://www.reddit.com/api/v1/access_token',
-      `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${CURRENT_URL}`,
+      `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${env.CURRENT_URL}`,
+      // `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${CURRENT_URL}`,
       {
-        auth: {username: process.env.CLIENT_ID, password: process.env.SECRET},
+        auth: {username: env.CLIENT_ID, password: env.SECRET},
         headers: {'Content-type': 'application/x-www-form-urlencoded'}
       }
     )
