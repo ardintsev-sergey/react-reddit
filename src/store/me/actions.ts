@@ -38,10 +38,11 @@ export const meRequestError: ActionCreator<MeRequestErrorAction> = (error: strin
 export const meRequestAsync = (): ThunkAction<void, RootState, unknown, MeActions> => (dispatch, getState) => {
   dispatch(meRequest());
   console.log(meRequest());
-
-  axios.get('https://oauth.reddit.com/api/v1/me', {
+  if (getState().token) {
+    axios
+    .get('https://oauth.reddit.com/api/v1/me', {
     headers: {Authorization: `bearer ${getState().token}`}
-  })
+    })
     .then((resp ) => {
       const userData = resp.data;
       dispatch(meRequestSuccess({ name: userData.name, iconImg: userData.icon_img }));
@@ -50,4 +51,5 @@ export const meRequestAsync = (): ThunkAction<void, RootState, unknown, MeAction
       console.log(error)
       dispatch(meRequestError(String(error)));
     });
+  }
 }
