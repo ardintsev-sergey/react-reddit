@@ -10,11 +10,17 @@ import { env } from 'process';
 
 const IS_DEV = env.NODE_ENV !== 'production'
 const PORT = env.PORT || 3000;
-const server_port = process.env.PORT || 3000;
-const server_host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+const server_port = env.PORT || 3000;
+const server_host = env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+const url = env.NODE_ENV === 'production' ? CURRENT_URL : env.CURRENT_URL;
+const client = env.NODE_ENV === 'production' ? CLIENT_ID : env.CLIENT_ID;
+const secr = env.NODE_ENV === 'production' ? SECRET : env.SECRET;
+
 // server.listen(server_port, server_host, function() {
 //     console.log('Listening on port %d', server_port);
 // });
+
+console.log(env);
 
 const app = express();
 
@@ -44,11 +50,11 @@ try {
       axios
         .post(
           'https://www.reddit.com/api/v1/access_token',
-          `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${env.CURRENT_URL}`,
+          `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${url}`,
           {
             auth: {
-              username: env.CLIENT_ID,
-              password: env.SECRET,
+              username: client,
+              password: secr,
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           }
