@@ -8,8 +8,8 @@ import compression from 'compression'
 import helmet, { contentSecurityPolicy } from 'helmet';
 import { env } from 'process';
 
-const IS_DEV = process.env.NODE_ENV !== 'production'
-const PORT = process.env.PORT || 3000;
+const IS_DEV = env.NODE_ENV !== 'production'
+const PORT = env.PORT || 3000;
 const server_port = process.env.PORT || 3000;
 const server_host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
 // server.listen(server_port, server_host, function() {
@@ -28,17 +28,31 @@ app.use(helmet({
 app.use('/static', express.static('./dist/client'));
 
 try {
-  app.get('/auth', (req, res) => {
-    axios
-      .post(
-        'https://www.reddit.com/api/v1/access_token',
-        `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${CURRENT_URL}`,
-        {
-          auth: {username: process.env.CLIENT_ID, password: process.env.SECRET},
-          mode: "no-cors",
-          headers: {'Content-type': 'application/x-www-form-urlencoded'}
-        }
-      )
+  // app.get('/auth', (req, res) => {
+  //   axios
+  //     .post(
+  //       'https://www.reddit.com/api/v1/access_token',
+  //       `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${CURRENT_URL}`,
+  //       {
+  //         auth: {username: process.env.CLIENT_ID, password: process.env.SECRET},
+  //         // mode: "no-cors",
+  //         headers: {'Content-type': 'application/x-www-form-urlencoded'}
+  //       }
+  //     )
+
+    app.get('/auth', (req, res) => {
+      axios
+        .post(
+          'https://www.reddit.com/api/v1/access_token',
+          `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${env.CURRENT_URL}`,
+          {
+            auth: {
+              username: env.CLIENT_ID,
+              password: env.SECRET,
+            },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          }
+        )
       .then(({ data }) => {
         res.send(
           indexHTMLTemplate(ReactDOM.renderToString(App()), data['access_token']),

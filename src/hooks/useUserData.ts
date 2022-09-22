@@ -15,7 +15,7 @@ export function useUserData() {
     const token = useSelector((state: RootState) => state.token);
     // const dispatch = useDispatch<AppDispatch>();
     const dispatch = useDispatch<any>();
-    console.log(token);
+    // console.log(token);
 
     useEffect(() => {
       if (!token) return;

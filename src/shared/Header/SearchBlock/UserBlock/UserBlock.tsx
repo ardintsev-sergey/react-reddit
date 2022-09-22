@@ -14,8 +14,6 @@ export function UserBlock({ avatarSrc, username, loading }: IUserBlockProps) {
     return (
         <a
         href={`https://www.reddit.com/api/v1/authorize?client_id=${CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${CURRENT_URL}&duration=temporary&scope=read submit identity`}
-        // href={`https://www.reddit.com/api/v1/authorize?client_id=${CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${CURRENT_URL}&duration=permanent&scope=read submit identity`}
-        // href={`https://www.reddit.com/api/v1/authorize?client_id=ETbnmE0Nvnz6m7rCR9gFUw&response_type=code&state=random_string&redirect_uri=http://localhost:3000/auth&duration=permanent&scope=read submit identity`}
         className={styles.userBox}>
             <div className={styles.avatarBox}>
               {avatarSrc
