@@ -16,11 +16,6 @@ const url = env.NODE_ENV === 'production' ? CURRENT_URL : env.CURRENT_URL;
 const client = env.NODE_ENV === 'production' ? CLIENT_ID : env.CLIENT_ID;
 const secr = env.NODE_ENV === 'production' ? SECRET : env.SECRET;
 
-// server.listen(server_port, server_host, function() {
-//     console.log('Listening on port %d', server_port);
-// });
-
-console.log(env);
 
 const app = express();
 
@@ -34,27 +29,15 @@ app.use(helmet({
 app.use('/static', express.static('./dist/client'));
 
 try {
-  // app.get('/auth', (req, res) => {
-  //   axios
-  //     .post(
-  //       'https://www.reddit.com/api/v1/access_token',
-  //       `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${CURRENT_URL}`,
-  //       {
-  //         auth: {username: process.env.CLIENT_ID, password: process.env.SECRET},
-  //         // mode: "no-cors",
-  //         headers: {'Content-type': 'application/x-www-form-urlencoded'}
-  //       }
-  //     )
-
     app.get('/auth', (req, res) => {
       axios
         .post(
           'https://www.reddit.com/api/v1/access_token',
-          `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${url}`,
+          `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${env.CURRENT_URL}`,
           {
             auth: {
-              username: client,
-              password: secr,
+              username: env.CLIENT_ID,
+              password: env.SECRET,
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           }
@@ -84,13 +67,13 @@ app.get('*', (req, res) => {
 
 // process.env.NODE_ENV === 'production' ?
 
-//   app.listen(PORT, () => {
-//     console.log(`Server started on http://localhost:${PORT}`)
-//   })
+  app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`)
+  })
 
 // :
 
-app.listen(server_port, server_host, function() {
-  console.log(`Server started on http://${server_host}:${server_port}`);
-});
+// app.listen(server_port, server_host, function() {
+//   console.log(`Server started on http://${server_host}:${server_port}`);
+// });
 
