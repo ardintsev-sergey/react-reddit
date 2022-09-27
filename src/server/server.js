@@ -33,11 +33,11 @@ try {
       axios
         .post(
           'https://www.reddit.com/api/v1/access_token',
-          `grant_type=authorization_code&code=${req.query.code}&redirect_uri=https://react-reddit-app-archunter.herokuapp.com/auth`,
+          `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${env.CURRENT_URL}`,
           {
             auth: {
-              username: 'NND_s0VYRmcBTnt4MACW0w',
-              password: 'RvgmFM3a6pR0MrB6THQp2VDAvPOkXg',
+              username: env.CLIENT_ID,
+              password: env.SECRET,
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           }
