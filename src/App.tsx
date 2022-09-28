@@ -46,7 +46,8 @@ function AppComponent() {
                     <Route path="/posts/" element={<CardsList />} />
                     <Route path="/posts/:id" element={<Post />} />
                     <Route path="/error" element={<Error />} />
-                    <Route path="/auth/" element={<Navigate to="/posts" replace />} />
+                    <Route path="/auth" element={<Navigate to="/posts" replace />} />
+                    <Route path="/" element={<Navigate to="/posts" replace />} />
                     <Route path="/*" element={<Navigate to="/error" replace />} />
                   </Routes>
                 </Content>
