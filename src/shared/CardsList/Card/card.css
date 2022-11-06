@@ -13,6 +13,7 @@
 .cardTop {
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 @media (min-width: 1024px) {
@@ -22,5 +23,11 @@
 
   .card:hover h2 a, .card:focus-within h2 a {
     color: var(--orange);
+  }
+}
+
+@media (min-width: 760px) {
+  .cardTop {
+    flex-direction: row;
   }
 }

@@ -1,7 +1,6 @@
 .textContent {
   display: flex;
   flex-flow: column wrap;
-  /* align-items: center; */
   padding: 22px 20px 13px;
   cursor: pointer;
 }
@@ -43,8 +42,20 @@
   }
 }
 
-@media (min-width: 1540px) {
+@media (min-width: 760px) {
   .textContent {
-    flex-basis: 672px;
-  }  
+    flex-basis: 400px;
+  }
+}
+
+@media (min-width: 860px) {
+  .textContent {
+    flex-basis: 540px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .textContent {
+    flex-basis: 700px;
+  }
 }

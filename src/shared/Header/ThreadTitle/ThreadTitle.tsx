@@ -1,13 +1,11 @@
-import moduleName from 'module';
-import React from 'react';
-import styles from './threadTitle.css'
+import moduleName from "module";
+import React from "react";
+import styles from "./threadTitle.css";
 
 interface ILayoutProps {
   children?: React.ReactNode;
 }
 
-export function ThreadTitle({children}: ILayoutProps) {
-  return (
-   <h1 className={styles.threadTitle}>Заголовок</h1>
-  );
+export function ThreadTitle({ children }: ILayoutProps) {
+  return <h1 className={styles.threadTitle}>Личный кабинет</h1>;
 }

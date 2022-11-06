@@ -4,9 +4,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 14px 20px;
-  background-color: var(--white);
-  border-radius: 0 0 7px 7px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   margin: 0 0 38px;
 }
 
@@ -19,5 +16,5 @@
     box-shadow: none;
     order: 3;
   }
-  
+
 }
